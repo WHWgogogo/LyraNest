@@ -33,21 +33,19 @@ ghcr.io/whwgogogo/lyranest-server:0.1.8
 ghcr.io/whwgogogo/lyranest-server:latest
 ```
 
-> Docker/OCI 镜像仓库名要求小写，因此镜像拉取名使用 `lyranest-server`；发行展示名称保持为 `LyraNest-server-0.1.8`。
+> Docker/OCI 镜像拉取名使用 `lyranest-server`；
 
 ## Docker Compose 完整配置
 
-下面是发行仓库中的完整 `docker-compose.yml`，注释标出了常用修改项：
+下面是发行仓库中的完整 `docker-compose.yml`：
 
 ```yaml
-# LyraNest 服务端 Docker Compose 配置
-# 建议复制 .env.example 为 .env，然后优先在 .env 中修改参数。
+
 
 services:
   lyranest:
-    # 镜像版本由 LYRANEST_VERSION 控制。
-    # 固定版本示例：0.1.8；自动跟随最新版：latest（不是 least）。
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.1.8}
+    # 版本控制
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-latest}
     container_name: lyranest
     restart: unless-stopped
     init: true
@@ -66,7 +64,7 @@ services:
       - no-new-privileges:true
 
     environment:
-      # 容器内部监听端口，一般不需要修改。
+      # 容器内部监听端口，无需修改。
       SERVER_ADDR: :8080
       MUSIC_LIBRARY_DIR: /music
       MUSIC_DATA_DIR: /data
@@ -169,3 +167,70 @@ docker compose up -d
 当前稳定版本：**0.1.8**
 
 更新记录见 [`releases/0.1.8/CHANGELOG.md`](releases/0.1.8/CHANGELOG.md)。
+
+## UI展示
+
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+听歌次数排行等
+2.安卓手机端
+[图片]
+[图片]
+[图片]
+
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+[图片]
+软件有桌面歌词，设置中可以修改歌词对齐方式、桌面歌词的颜色、字号等，点击暂停键上方下载右侧的图标，授予软件通知权限与悬浮窗权限，即可开启桌面歌词，桌面歌词可以随意拖动，其透明度可以在设置中进行修改。向右滑动，点击歌词右上角展开可以对齐歌词与播放进度（对于没有对齐的歌词）
+[图片]
+[图片]
+[图片]
+播放队列在右下角，可以拖动右侧滑条调整顺序，此外还有睡眠定时功能等不再赘述，你可以自行探索！
+[图片]
+[图片]
+[图片]
+发现页面与网页端类似，拥有每日推荐、猜你喜欢等内容
+[图片]
+[图片]
+[图片]
+[图片]
+3.、平板、windows桌面端
+
+[图片]
+
+[图片]
+[图片]
+[图片]
+[图片]
+
+## 未来规划
+目前的开发已经告一段落，在未来，有如下规划：
+将核心功能开源，方便喜欢开源软件的人部署；
+增加多账户功能、增加音乐库功能（类似于飞牛的影视库的分级制度）；
+增加k歌与点歌台的功能，这个一定会做的，因为我老妈超级爱唱歌，大家可以期待一下下；
+增加共建评论区功能（如果合规的话我尽量尝试做一下，只通过歌名与歌手匹配）；
+移植鸿蒙版（如果可以的话，我尽量做）；
+其他···
+如果您有好的建议和想法，欢迎给我提出来，我会尽量尝试做的！
+后面有时间的话，我会将教程视频录制到我的b站账号上发布，也欢迎大家来评论区交流！
+
+
+## 写在最后的话
+律巢是我利用备考空闲时间做出的软件，我对其倾注了很多，虽然他不是很完美，但是我个人认为他足够的轻巧，功能也足够完善，后续肯定还会添加很多功能，但是我暂时精力有限很难去维护他，大概等到考研结束后，我会为他完善更多的功能，如果您在使用中遇到了任何问题，也欢迎与我联系。
+我的邮箱：whw1377236334@163.com 
+我的b站账号：https://space.bilibili.com/416521837?spm_id_from=333.1007.0.0
+最后如果您觉得我的这个项目还不错，也欢迎赞助我，感谢您的支持！
