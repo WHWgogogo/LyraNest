@@ -38,11 +38,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" release-assets/* \
-            --verify-tag \
-            --latest \
-            --title "LyraNest ${VERSION}" \
-            --notes-file "releases/${VERSION}/CHANGELOG.md"
+          if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            gh release edit "${GITHUB_REF_NAME}" \
+              --latest \
+              --title "LyraNest ${VERSION}" \
+              --notes-file "releases/${VERSION}/CHANGELOG.md"
+            gh release upload "${GITHUB_REF_NAME}" release-assets/* --clobber
+          else
+            gh release create "${GITHUB_REF_NAME}" release-assets/* \
+              --verify-tag \
+              --latest \
+              --title "LyraNest ${VERSION}" \
+              --notes-file "releases/${VERSION}/CHANGELOG.md"
+          fi
 
   container:
     runs-on: ubuntu-latest
@@ -71,5 +79,5 @@ jobs:
           build-args: |
             VERSION=${{ steps.version.outputs.value }}
           tags: |
-            ghcr.io/whwgogogo/lyranest:${{ steps.version.outputs.value }}
-            ghcr.io/whwgogogo/lyranest:latest
+            ghcr.io/whwgogogo/lyranest-server:${{ steps.version.outputs.value }}
+            ghcr.io/whwgogogo/lyranest-server:latest

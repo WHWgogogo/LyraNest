@@ -1,6 +1,6 @@
 services:
   lyranest:
-    image: ghcr.io/whwgogogo/lyranest:${LYRANEST_VERSION:-0.1.8}
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.1.8}
     container_name: lyranest
     restart: unless-stopped
     init: true
@@ -17,7 +17,7 @@ services:
       MUSIC_DATA_DIR: /data
       GOMEMLIMIT: ${GOMEMLIMIT:-192MiB}
       GOGC: ${GOGC:-100}
-      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest/0.1.8 (+https://github.com/WHWgogogo/LyraNest)}
+      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest-server-0.1.8 (+https://github.com/WHWgogogo/LyraNest)}
       MUSICBRAINZ_BASE_URL: ${MUSICBRAINZ_BASE_URL:-https://musicbrainz.org}
       MUSICBRAINZ_TIMEOUT: ${MUSICBRAINZ_TIMEOUT:-20s}
       LOG_LEVEL: ${LOG_LEVEL:-info}

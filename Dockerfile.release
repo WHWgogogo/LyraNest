@@ -3,8 +3,8 @@ ARG VERSION=0.1.8
 FROM alpine:3.20
 
 ARG VERSION
-LABEL org.opencontainers.image.title="LyraNest Server" \
-      org.opencontainers.image.description="Self-hosted LyraNest music server" \
+LABEL org.opencontainers.image.title="LyraNest-server" \
+      org.opencontainers.image.description="Self-hosted LyraNest server" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.source="https://github.com/WHWgogogo/LyraNest"
 
