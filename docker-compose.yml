@@ -1,0 +1,40 @@
+services:
+  lyranest:
+    image: ghcr.io/whwgogogo/lyranest:${LYRANEST_VERSION:-0.1.8}
+    container_name: lyranest
+    restart: unless-stopped
+    init: true
+    platform: linux/amd64
+    pull_policy: always
+    user: ${PUID:-1000}:${PGID:-1000}
+    mem_limit: ${SERVER_MEMORY_LIMIT:-256m}
+    mem_reservation: ${SERVER_MEMORY_RESERVATION:-128m}
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      SERVER_ADDR: :8080
+      MUSIC_LIBRARY_DIR: /music
+      MUSIC_DATA_DIR: /data
+      GOMEMLIMIT: ${GOMEMLIMIT:-192MiB}
+      GOGC: ${GOGC:-100}
+      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest/0.1.8 (+https://github.com/WHWgogogo/LyraNest)}
+      MUSICBRAINZ_BASE_URL: ${MUSICBRAINZ_BASE_URL:-https://musicbrainz.org}
+      MUSICBRAINZ_TIMEOUT: ${MUSICBRAINZ_TIMEOUT:-20s}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      SHUTDOWN_TIMEOUT: ${SHUTDOWN_TIMEOUT:-10s}
+      AUTH_SESSION_TTL: ${AUTH_SESSION_TTL:-24h}
+      HTTP_PROXY: ${HTTP_PROXY:-}
+      HTTPS_PROXY: ${HTTPS_PROXY:-}
+      NO_PROXY: ${NO_PROXY:-}
+    ports:
+      - ${SERVER_PORT:-8080}:8080
+    volumes:
+      - ${MUSIC_LIBRARY_HOST_DIR:-./music}:/music:rw
+      - ${DATA_DIR:-./data}:/data:rw
+      - ${CACHE_DIR:-./cache}:/cache:rw
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/music-player-server", "healthcheck"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s

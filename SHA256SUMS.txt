@@ -1,2 +1,0 @@
-fedd1b68c53609c54e95fa9b97d08455b7df328d03b6c67fb937c6e4fc4ea7dd  LyraNest-Android-arm64-0.1.8.apk
-7945e4915b2778e3d60cc5b4a7673cebcbaabad7fbf2143a25b6a576397a2e97  LyraNest-Windows-x64-0.1.8.zip

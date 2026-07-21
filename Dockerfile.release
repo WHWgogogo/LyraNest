@@ -1,0 +1,26 @@
+ARG VERSION=0.1.8
+
+FROM alpine:3.20
+
+ARG VERSION
+LABEL org.opencontainers.image.title="LyraNest Server" \
+      org.opencontainers.image.description="Self-hosted LyraNest music server" \
+      org.opencontainers.image.version="${VERSION}" \
+      org.opencontainers.image.source="https://github.com/WHWgogogo/LyraNest"
+
+WORKDIR /app
+RUN apk add --no-cache ca-certificates tzdata \
+    && adduser -D -H -u 10001 appuser
+
+COPY releases/${VERSION}/docker/linux-amd64/music-player-server /usr/local/bin/music-player-server
+RUN chmod 0755 /usr/local/bin/music-player-server
+
+USER appuser
+ENV SERVER_ADDR=:8080 \
+    MUSIC_LIBRARY_DIR=/music \
+    MUSIC_DATA_DIR=/data \
+    GOMEMLIMIT=192MiB \
+    GOGC=100
+EXPOSE 8080
+
+ENTRYPOINT ["/usr/local/bin/music-player-server"]
