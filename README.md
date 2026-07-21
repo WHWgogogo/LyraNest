@@ -102,7 +102,7 @@ services:
       start_period: 30s
 ```
 
-## Docker Compose 部署
+## Docker 部署
 
 在 Linux 服务器上执行：
 
