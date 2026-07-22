@@ -10,6 +10,7 @@
 - 修复 Android 通知栏播放模式与桌面歌词按钮错位问题。
 - 优化 Android 桌面歌词背景宽度，使其跟随歌词内容动态变化。
 - 提供 Android ARM64、Windows x64 与 Docker 服务端发行版本。
+- 新增飞牛 fnOS x86 原生 FPK 安装包，支持飞牛统一网关访问与可选局域网自定义端口。
 
 ## Docker 镜像
 

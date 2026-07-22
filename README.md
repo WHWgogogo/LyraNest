@@ -125,9 +125,19 @@
 | --- | --- |
 | Android ARM64 APK | Android 手机、平板客户端 |
 | Windows x64 ZIP | Windows 桌面客户端 |
+| `LyraNest-0.1.8-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
 | `docker-compose.yml` | Docker Compose 部署配置 |
 | `LyraNest.env.example` | Docker 环境变量示例 |
 | `SHA256SUMS.txt` | 发行文件 SHA-256 校验值 |
+| `SHA256SUMS-fnOS.txt` | 飞牛 fnOS FPK 的 SHA-256 校验值 |
+
+## 飞牛 fnOS 原生 FPK 安装（推荐）
+
+飞牛 NAS 用户推荐从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载 `LyraNest-0.1.8-fnos-x86.fpk`，然后在飞牛应用中心使用“手动安装”导入该文件。
+
+安装后，在应用设置中授权音乐目录并启动 LyraNest。默认使用飞牛统一网关访问：在你平时打开飞牛管理界面的局域网地址后追加 `/app/lyranest`。
+
+如需独立局域网端口，可在 LyraNest 应用设置填写 `1024–65535` 的自定义端口，保存后重启应用，再通过 `http://<飞牛局域网地址>:<端口>/` 访问。留空则只保留飞牛网关入口；独立端口仅建议用于可信局域网，不要配置公网端口映射。
 
 ## Docker 镜像
 
@@ -243,7 +253,7 @@ curl http://127.0.0.1:8080/health
 
 - 每个版本都保留独立 GitHub Release 与附件，不会覆盖旧版本。
 - README 的下载入口使用 GitHub `releases/latest`，始终指向最新稳定发行。
-- 下载完成后可用 `SHA256SUMS.txt` 校验文件完整性。
+- 下载完成后可用对应的 `SHA256SUMS.txt` 或 `SHA256SUMS-fnOS.txt` 校验文件完整性。
 - 详细更新内容请查看对应版本的 `CHANGELOG.md`。
 
 ## 相关项目
