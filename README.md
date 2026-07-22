@@ -9,7 +9,7 @@
 <p align="center">
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest"><img src="https://img.shields.io/github/v/release/WHWgogogo/LyraNest?display_name=tag&label=Release" alt="Latest Release" /></a>
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest"><img src="https://img.shields.io/badge/Platform-Android%20%7C%20Windows-4f46e5" alt="Platforms" /></a>
-  <a href="docker-compose.yml"><img src="https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white" alt="Docker Compose" /></a>
+  <a href="https://github.com/WHWgogogo/LyraNest/releases/latest/download/docker-compose.yml"><img src="https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white" alt="Docker Compose" /></a>
 </p>
 
 <p align="center">
@@ -140,6 +140,73 @@ ghcr.io/whwgogogo/lyranest-server:0.1.8
 如需跟随后续发行，可将 Compose 中的 `LYRANEST_VERSION` 改为已发布的明确版本号；生产环境建议固定具体版本，便于回滚。
 
 ## Docker Compose 部署
+
+根目录的 [`docker-compose.yml`](docker-compose.yml) 已附带中文注释，完整配置如下；可直接保存为同名文件后执行部署：
+
+```yaml
+# LyraNest 服务端 Docker Compose 配置
+# 建议复制 .env.example 为 .env，然后优先在 .env 中修改参数。
+
+services:
+  lyranest:
+    # 镜像版本由 LYRANEST_VERSION 控制。
+    # 固定版本示例：0.1.8；自动跟随最新版：latest（不是 least）。
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.1.8}
+    container_name: lyranest
+    restart: unless-stopped
+    init: true
+
+    # 当前发行镜像为 Linux AMD64；ARM 服务器暂时不能直接使用此镜像。
+    platform: linux/amd64
+    pull_policy: always
+
+    # 修改为服务器当前用户的 UID/GID，可通过 id -u 和 id -g 查询。
+    user: ${PUID:-1000}:${PGID:-1000}
+
+    # 可按服务器内存大小调整限制；默认最大 256 MB，预留 128 MB。
+    mem_limit: ${SERVER_MEMORY_LIMIT:-256m}
+    mem_reservation: ${SERVER_MEMORY_RESERVATION:-128m}
+    security_opt:
+      - no-new-privileges:true
+
+    environment:
+      # 容器内部监听端口，一般不需要修改。
+      SERVER_ADDR: :8080
+      MUSIC_LIBRARY_DIR: /music
+      MUSIC_DATA_DIR: /data
+      GOMEMLIMIT: ${GOMEMLIMIT:-192MiB}
+      GOGC: ${GOGC:-100}
+      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest-server-0.1.8 (+https://github.com/WHWgogogo/LyraNest)}
+      MUSICBRAINZ_BASE_URL: ${MUSICBRAINZ_BASE_URL:-https://musicbrainz.org}
+      MUSICBRAINZ_TIMEOUT: ${MUSICBRAINZ_TIMEOUT:-20s}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      SHUTDOWN_TIMEOUT: ${SHUTDOWN_TIMEOUT:-10s}
+      AUTH_SESSION_TTL: ${AUTH_SESSION_TTL:-24h}
+      HTTP_PROXY: ${HTTP_PROXY:-}
+      HTTPS_PROXY: ${HTTPS_PROXY:-}
+      NO_PROXY: ${NO_PROXY:-}
+
+    ports:
+      # 左侧是主机访问端口，右侧 8080 是容器端口。
+      # 例如 SERVER_PORT=9090 时，访问地址为 http://服务器地址:9090。
+      - ${SERVER_PORT:-8080}:8080
+
+    volumes:
+      # 冒号左侧是主机目录，可以改成绝对路径；右侧容器目录不要修改。
+      # 音乐目录示例：/mnt/music:/music:rw 或 /volume1/music:/music:rw。
+      - ${MUSIC_LIBRARY_HOST_DIR:-./music}:/music:rw
+      # 数据目录保存账号、收藏、歌单和服务端状态。
+      - ${DATA_DIR:-./data}:/data:rw
+      # 缓存目录保存运行缓存。
+      - ${CACHE_DIR:-./cache}:/cache:rw
+
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/music-player-server", "healthcheck"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+```
 
 ### 1. 准备目录与配置
 
