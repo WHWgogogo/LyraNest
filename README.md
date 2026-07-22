@@ -179,8 +179,9 @@ docker compose up -d
 ![LyraNest UI screenshot 07](docs/images/7.png)
 ![LyraNest UI screenshot 08](docs/images/8.png)
 ![LyraNest UI screenshot 09](docs/images/9.png)
-![LyraNest UI screenshot 10](docs/images/10.jpg)
+
 2.安卓手机端
+![LyraNest UI screenshot 10](docs/images/10.jpg)
 ![LyraNest UI screenshot 11](docs/images/11.jpg)
 ![LyraNest UI screenshot 12](docs/images/12.jpg)
 ![LyraNest UI screenshot 13](docs/images/13.jpg)
