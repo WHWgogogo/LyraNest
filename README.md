@@ -139,7 +139,7 @@
 | `LyraNest-0.1.9-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
 | `LyraNest-v0.1.9-docker-amd64.tar.gz` | Docker Linux AMD64 离线镜像包 |
 | `docker-compose.yml` | Docker Compose 部署配置 |
-| `.env.example` | Docker 环境变量示例 |
+| `LyraNest.env.example` | Docker 环境变量示例 |
 | `SHA256SUMS.txt` | 发行文件 SHA-256 校验值 |
 | `SHA256SUMS-fnOS.txt` | 飞牛 fnOS FPK 的 SHA-256 校验值 |
 
@@ -236,7 +236,7 @@ services:
 mkdir -p lyranest && cd lyranest
 curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNest-v0.1.9-docker-amd64.tar.gz
 curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/docker-compose.yml
-curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/.env.example
+curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNest.env.example
 docker load -i LyraNest-v0.1.9-docker-amd64.tar.gz
 mkdir -p music data cache
 cp .env.example .env
