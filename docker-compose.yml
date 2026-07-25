@@ -4,15 +4,14 @@
 services:
   lyranest:
     # 镜像版本由 LYRANEST_VERSION 控制。
-    # 固定版本示例：0.1.8；自动跟随最新版：latest（不是 least）。
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.1.8}
+    # 固定版本示例：0.1.9。请先从 GitHub Release 下载并导入 Docker 离线包。
+    image: lyranest-server:${LYRANEST_VERSION:-0.1.9}
     container_name: lyranest
     restart: unless-stopped
     init: true
 
     # 当前发行镜像为 Linux AMD64；ARM 服务器暂时不能直接使用此镜像。
     platform: linux/amd64
-    pull_policy: always
 
     # 修改为服务器当前用户的 UID/GID，可通过 id -u 和 id -g 查询。
     user: ${PUID:-1000}:${PGID:-1000}
@@ -28,9 +27,10 @@ services:
       SERVER_ADDR: :8080
       MUSIC_LIBRARY_DIR: /music
       MUSIC_DATA_DIR: /data
+      MUSIC_CACHE_DIR: /cache
       GOMEMLIMIT: ${GOMEMLIMIT:-192MiB}
       GOGC: ${GOGC:-100}
-      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest-server-0.1.8 (+https://github.com/WHWgogogo/LyraNest)}
+      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest/0.1.9 (+https://github.com/WHWgogogo/LyraNest)}
       MUSICBRAINZ_BASE_URL: ${MUSICBRAINZ_BASE_URL:-https://musicbrainz.org}
       MUSICBRAINZ_TIMEOUT: ${MUSICBRAINZ_TIMEOUT:-20s}
       LOG_LEVEL: ${LOG_LEVEL:-info}
@@ -47,8 +47,8 @@ services:
 
     volumes:
       # 冒号左侧是主机目录，可以改成绝对路径；右侧容器目录不要修改。
-      # 音乐目录示例：/mnt/music:/music:rw 或 /volume1/music:/music:rw。
-      - ${MUSIC_LIBRARY_HOST_DIR:-./music}:/music:rw
+      # 音乐目录示例：/mnt/music:/music:ro 或 /volume1/music:/music:ro。
+      - ${MUSIC_LIBRARY_HOST_DIR:-./music}:/music:ro
       # 数据目录保存账号、收藏、歌单和服务端状态。
       - ${DATA_DIR:-./data}:/data:rw
       # 缓存目录保存运行缓存。

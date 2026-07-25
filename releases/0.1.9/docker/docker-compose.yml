@@ -1,12 +1,11 @@
 services:
-  music-server:
-    build:
-      context: "${SERVER_BUILD_CONTEXT:-../server}"
-      dockerfile: "${SERVER_DOCKERFILE:-Dockerfile.prebuilt}"
-    image: lyranest-server:${SERVER_IMAGE_TAG:-0.1.9}
-    container_name: lyranest-server
+  lyranest:
+    image: lyranest-server:${LYRANEST_VERSION:-0.1.9}
+    container_name: lyranest
     restart: unless-stopped
-    user: "${PUID:-10001}:${PGID:-10001}"
+    init: true
+    platform: linux/amd64
+    user: "${PUID:-1000}:${PGID:-1000}"
     mem_limit: "${SERVER_MEMORY_LIMIT:-256m}"
     mem_reservation: "${SERVER_MEMORY_RESERVATION:-128m}"
     environment:
@@ -39,23 +38,3 @@ services:
       timeout: 5s
       retries: 5
       start_period: 90s
-
-  music-web:
-    profiles: ["web"]
-    build:
-      context: "${WEB_BUILD_CONTEXT:-../apps/web}"
-      dockerfile: "${WEB_DOCKERFILE:-Dockerfile}"
-    image: lyranest-web:${WEB_IMAGE_TAG:-0.1.9}
-    container_name: lyranest-web
-    restart: unless-stopped
-    depends_on:
-      music-server:
-        condition: service_healthy
-    ports:
-      - "${WEB_PORT:-8081}:80"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1/healthz || exit 1"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 20s
