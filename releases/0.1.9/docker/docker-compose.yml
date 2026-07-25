@@ -1,0 +1,61 @@
+services:
+  music-server:
+    build:
+      context: "${SERVER_BUILD_CONTEXT:-../server}"
+      dockerfile: "${SERVER_DOCKERFILE:-Dockerfile.prebuilt}"
+    image: lyranest-server:${SERVER_IMAGE_TAG:-0.1.9}
+    container_name: lyranest-server
+    restart: unless-stopped
+    user: "${PUID:-10001}:${PGID:-10001}"
+    mem_limit: "${SERVER_MEMORY_LIMIT:-256m}"
+    mem_reservation: "${SERVER_MEMORY_RESERVATION:-128m}"
+    environment:
+      SERVER_ADDR: ":8080"
+      MUSIC_LIBRARY_DIR: /music
+      MUSIC_DATA_DIR: /data
+      MUSIC_CACHE_DIR: /cache
+      GOMEMLIMIT: "${GOMEMLIMIT:-192MiB}"
+      GOGC: "${GOGC:-100}"
+      MUSICBRAINZ_USER_AGENT: "${MUSICBRAINZ_USER_AGENT:-LyraNest/0.1.9 (+https://github.com/WHWgogogo/LyraNest)}"
+      MUSICBRAINZ_BASE_URL: "${MUSICBRAINZ_BASE_URL:-https://musicbrainz.org}"
+      MUSICBRAINZ_TIMEOUT: "${MUSICBRAINZ_TIMEOUT:-20s}"
+      SCRAPER_PROVIDER_CONFIG: "${SCRAPER_PROVIDER_CONFIG:-}"
+      HTTP_PROXY: "${HTTP_PROXY:-}"
+      HTTPS_PROXY: "${HTTPS_PROXY:-}"
+      NO_PROXY: "${NO_PROXY:-}"
+      LOG_LEVEL: "${LOG_LEVEL:-info}"
+      SHUTDOWN_TIMEOUT: "${SHUTDOWN_TIMEOUT:-10s}"
+      AUTH_SESSION_TTL: "${AUTH_SESSION_TTL:-24h}"
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+    volumes:
+      - "${MUSIC_LIBRARY_HOST_DIR:-./music}:/music:ro"
+      - "${DATA_DIR:-./data}:/data:rw"
+      - "${CACHE_DIR:-./cache}:/cache:rw"
+      - "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro"
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/music-player-server", "healthcheck"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 90s
+
+  music-web:
+    profiles: ["web"]
+    build:
+      context: "${WEB_BUILD_CONTEXT:-../apps/web}"
+      dockerfile: "${WEB_DOCKERFILE:-Dockerfile}"
+    image: lyranest-web:${WEB_IMAGE_TAG:-0.1.9}
+    container_name: lyranest-web
+    restart: unless-stopped
+    depends_on:
+      music-server:
+        condition: service_healthy
+    ports:
+      - "${WEB_PORT:-8081}:80"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1/healthz || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

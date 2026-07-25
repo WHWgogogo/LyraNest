@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "minimum_confidence": 0.75,
+  "sources": [{
+    "name": "qqmusic",
+    "enabled": false,
+    "confidence_scorer": "fuzzy_v1",
+    "search": {
+      "url": "https://licensed-gateway.example/qqmusic/search?query={query}&limit={limit}",
+      "method": "GET",
+      "headers": {"User-Agent": "LyraNest/0.1.9"},
+      "response_mapping": {
+        "items_path": "data.song.list",
+        "id_field": "songmid",
+        "title_field": "songname",
+        "artist_field": "singer[0].name",
+        "album_field": "albumname",
+        "cover_field": "cover",
+        "duration_field": "interval",
+        "duration_unit": "seconds"
+      }
+    },
+    "lyrics": {
+      "url": "https://licensed-gateway.example/qqmusic/lyrics?id={id}",
+      "method": "GET",
+      "response_mapping": {"lrc_path": "lyrics"}
+    }
+  }]
+}

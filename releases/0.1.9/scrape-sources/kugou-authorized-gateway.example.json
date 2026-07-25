@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "minimum_confidence": 0.75,
+  "sources": [{
+    "name": "kugou",
+    "enabled": false,
+    "confidence_scorer": "fuzzy_v1",
+    "search": {
+      "url": "https://licensed-gateway.example/kugou/search?query={query}&limit={limit}",
+      "method": "GET",
+      "headers": {"User-Agent": "LyraNest/0.1.9"},
+      "response_mapping": {
+        "items_path": "data.lists",
+        "id_field": "FileHash",
+        "title_field": "SongName",
+        "artist_field": "SingerName",
+        "album_field": "AlbumName",
+        "cover_field": "Image",
+        "duration_field": "Duration",
+        "duration_unit": "seconds"
+      }
+    },
+    "lyrics": {
+      "url": "https://licensed-gateway.example/kugou/lyrics?id={id}",
+      "method": "GET",
+      "response_mapping": {"lrc_path": "lyrics"}
+    }
+  }]
+}

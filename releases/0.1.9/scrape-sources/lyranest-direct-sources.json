@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "minimum_confidence": 0.75,
+  "sources": [
+    {
+      "name": "netease",
+      "enabled": true,
+      "confidence_scorer": "fuzzy_v1",
+      "search": {
+        "url": "https://music.163.com/api/cloudsearch/pc?s={query}&type=1&offset=0&limit={limit}",
+        "method": "GET",
+        "headers": {"User-Agent": "Mozilla/5.0"},
+        "response_mapping": {
+          "items_path": "result.songs",
+          "id_field": "id",
+          "title_field": "name",
+          "artist_field": "ar[0].name",
+          "album_field": "al.name",
+          "album_artist_field": "ar[0].name",
+          "cover_field": "al.picUrl",
+          "duration_field": "dt",
+          "duration_unit": "ms"
+        }
+      },
+      "lyrics": {
+        "url": "https://music.163.com/api/song/lyric?id={id}&lv=1&tv=1",
+        "method": "GET",
+        "response_mapping": {"lrc_path": "lrc.lyric", "translated_path": "tlyric.lyric"}
+      }
+    },
+    {
+      "name": "qqmusic",
+      "enabled": true,
+      "confidence_scorer": "fuzzy_v1",
+      "search": {
+        "url": "https://c.y.qq.com/soso/fcgi-bin/client_search_cp?p=1&n={limit}&w={query}&format=json&new_json=1",
+        "method": "GET",
+        "headers": {"User-Agent": "Mozilla/5.0", "Referer": "https://y.qq.com/"},
+        "response_mapping": {
+          "items_path": "data.song.list",
+          "id_field": "mid",
+          "title_field": "title",
+          "artist_field": "singer[0].name",
+          "album_field": "album.name",
+          "album_artist_field": "singer[0].name",
+          "duration_field": "interval",
+          "duration_unit": "s"
+        }
+      },
+      "lyrics": {
+        "url": "https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg?format=json&nobase64=1&songmid={id}&g_tk=5381&loginUin=0&hostUin=0&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq.json&needNewCode=0",
+        "method": "GET",
+        "headers": {"User-Agent": "Mozilla/5.0", "Referer": "https://y.qq.com/"},
+        "response_mapping": {"lrc_path": "lyric"}
+      }
+    },
+    {
+      "name": "kugou",
+      "enabled": true,
+      "confidence_scorer": "fuzzy_v1",
+      "search": {
+        "url": "http://mobilecdn.kugou.com/api/v3/search/song?format=json&keyword={query}&page=1&pagesize={limit}",
+        "method": "GET",
+        "headers": {"User-Agent": "Mozilla/5.0"},
+        "response_mapping": {
+          "items_path": "data.info",
+          "id_field": "hash",
+          "title_field": "songname",
+          "artist_field": "singername",
+          "album_field": "album_name",
+          "album_artist_field": "singername",
+          "genre_field": "trans_param.language",
+          "duration_field": "duration",
+          "duration_unit": "s"
+        }
+      }
+    }
+  ]
+}
