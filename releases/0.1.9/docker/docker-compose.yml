@@ -1,6 +1,6 @@
 services:
   lyranest:
-    image: lyranest-server:${LYRANEST_VERSION:-0.1.9}
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.1.9}
     container_name: lyranest
     restart: unless-stopped
     init: true

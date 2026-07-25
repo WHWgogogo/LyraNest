@@ -153,13 +153,15 @@
 
 ## Docker 镜像
 
-本次发行提供 Docker 离线镜像包；导入后服务端镜像统一命名为：
+服务端镜像统一命名为：
 
 ```text
-lyranest-server:0.1.9
+ghcr.io/whwgogogo/lyranest-server:0.1.9
 ```
 
-生产环境请固定 `LYRANEST_VERSION=0.1.9`。后续升级时下载对应版本的离线镜像包、校验并导入，再将该变量更新为相同版本号；不提供不确定的 Docker `latest` 标签。
+生产环境请固定 `LYRANEST_VERSION=0.1.9`。其他设备可直接从 GHCR 拉取该镜像；本仓库不在 Compose 中使用不确定的 Docker `latest` 标签。
+
+> 如果 Docker 报出 `proxyconnect tcp ... 127.0.0.1:27897: connect: connection refused`，请移除 Docker 守护进程中失效的 HTTP/HTTPS 代理后再拉取。若设备不能联网，可使用本次发行的 Docker 离线包并按下方命令导入和标记镜像。
 
 ## Docker Compose 部署
 
@@ -172,8 +174,8 @@ lyranest-server:0.1.9
 services:
   lyranest:
     # 镜像版本由 LYRANEST_VERSION 控制。
-    # 固定版本示例：0.1.9。请先从 GitHub Release 下载并导入 Docker 离线包。
-    image: lyranest-server:${LYRANEST_VERSION:-0.1.9}
+    # 固定版本示例：0.1.9。其他设备可直接从 GHCR 拉取该正式镜像。
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.1.9}
     container_name: lyranest
     restart: unless-stopped
     init: true
@@ -238,6 +240,7 @@ curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNes
 curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/docker-compose.yml
 curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNest.env.example
 docker load -i LyraNest-v0.1.9-docker-amd64.tar.gz
+docker tag lyranest-server:0.1.9 ghcr.io/whwgogogo/lyranest-server:0.1.9
 mkdir -p music data cache
 cp .env.example .env
 ```
@@ -256,6 +259,7 @@ cp .env.example .env
 ### 2. 启动与检查
 
 ```bash
+docker compose pull
 docker compose up -d
 docker compose ps
 curl http://127.0.0.1:8080/health
