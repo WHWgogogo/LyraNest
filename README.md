@@ -15,7 +15,7 @@
 <p align="center">
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest">下载最新版</a> ·
   <a href="#docker-compose-部署">Docker 部署</a> ·
-  <a href="releases/0.1.9/CHANGELOG.md">更新日志</a> ·
+  <a href="releases/0.2.0/CHANGELOG.md">更新日志</a> ·
   <a href="https://github.com/WHWgogogo/LyraNest-Community">开源社区版</a>
 </p>
 
@@ -23,18 +23,18 @@
 
 将音乐文件保存在自己的服务器、NAS 或电脑中，即可通过 Web、Windows 和 Android 客户端管理、播放并同步个人音乐库。
 
-当前稳定版本：`0.1.9`
+当前稳定版本：`0.2.0`
 
 交流 QQ 群：`700454910`
 
-## 0.1.9 更新摘要
+## 0.2.0 更新摘要
 
-- **曲库与服务端**：流式全量/增量扫描、可持久化热更新、曲库变动推送，以及更可靠的大曲库首次部署。
-- **刮削与播放**：新增 JSON 刮削源和批量刮削工作台；自动下载与播放缓存分离，支持边播边缓存与离线播放。
-- **客户端与 Web**：新增完整 Web 刮削页，完善批量操作、中文与响应式界面，并同步修复 Windows、Android、Web 与 fnOS 的多项问题。
-- **Docker 与 fnOS**：Docker 改为只读挂载音乐库，运行数据与缓存单独持久化；fnOS FPK 同步升级至 `0.1.9`。
+- **跨端播放与服务端隔离**：新增跨端续播；媒体流和封面改用会话绑定短期令牌，并为每台服务器独立保存地址、登录状态和会话。
+- **Android 与歌词体验**：重构 Android 后台播放和系统媒体会话，新增通知栏进度同步；播放页、桌面歌词支持双语、A2 Enhanced LRC 和 YRC 逐字高亮。
+- **刮削与性能**：批量刮削补齐候选审核、字段选择、编辑、进度提示和重试状态，降低批量刮削内存占用并提高写入效率。
+- **正式部署包**：Windows、Android、fnOS 与 Docker Linux AMD64 发行包统一升级至 `0.2.0`。
 
-完整升级注意事项和更新内容请查看 [`releases/0.1.9/CHANGELOG.md`](releases/0.1.9/CHANGELOG.md)。
+完整升级注意事项和更新内容请查看 [`releases/0.2.0/CHANGELOG.md`](releases/0.2.0/CHANGELOG.md)。
 
 ## 功能简介
 
@@ -136,8 +136,8 @@
 | --- | --- |
 | Android ARM64 APK | Android 手机、平板客户端 |
 | Windows x64 ZIP | Windows 桌面客户端 |
-| `LyraNest-0.1.9-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
-| `LyraNest-v0.1.9-docker-amd64.tar.gz` | Docker Linux AMD64 离线镜像包 |
+| `LyraNest-0.2.0-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
+| `LyraNest-v0.2.0-docker-amd64.tar.gz` | Docker Linux AMD64 离线镜像包 |
 | `docker-compose.yml` | Docker Compose 部署配置 |
 | `LyraNest.env.example` | Docker 环境变量示例 |
 | `SHA256SUMS.txt` | 发行文件 SHA-256 校验值 |
@@ -145,7 +145,7 @@
 
 ## 飞牛 fnOS 原生 FPK 安装（推荐）
 
-飞牛 NAS 用户推荐从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载 `LyraNest-0.1.9-fnos-x86.fpk`，然后在飞牛应用中心使用“手动安装”导入该文件。
+飞牛 NAS 用户推荐从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载 `LyraNest-0.2.0-fnos-x86.fpk`，然后在飞牛应用中心使用“手动安装”导入该文件。
 
 安装后，在应用设置中授权音乐目录并启动 LyraNest。默认使用飞牛统一网关访问：在你平时打开飞牛管理界面的局域网地址后追加 `/app/lyranest`。
 
@@ -156,10 +156,10 @@
 服务端镜像统一命名为：
 
 ```text
-ghcr.io/whwgogogo/lyranest-server:0.1.9
+ghcr.io/whwgogogo/lyranest-server:0.2.0
 ```
 
-生产环境请固定 `LYRANEST_VERSION=0.1.9`。其他设备可直接从 GHCR 拉取该镜像；本仓库不在 Compose 中使用不确定的 Docker `latest` 标签。
+生产环境请固定 `LYRANEST_VERSION=0.2.0`。其他设备可直接从 GHCR 拉取该镜像；本仓库不在 Compose 中使用不确定的 Docker `latest` 标签。
 
 > 如果 Docker 报出 `proxyconnect tcp ... 127.0.0.1:27897: connect: connection refused`，请移除 Docker 守护进程中失效的 HTTP/HTTPS 代理后再拉取。若设备不能联网，可使用本次发行的 Docker 离线包并按下方命令导入和标记镜像。
 
@@ -174,8 +174,8 @@ ghcr.io/whwgogogo/lyranest-server:0.1.9
 services:
   lyranest:
     # 镜像版本由 LYRANEST_VERSION 控制。
-    # 固定版本示例：0.1.9。其他设备可直接从 GHCR 拉取该正式镜像。
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.1.9}
+    # 固定版本示例：0.2.0。其他设备可直接从 GHCR 拉取该正式镜像。
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.0}
     container_name: lyranest
     restart: unless-stopped
     init: true
@@ -200,7 +200,8 @@ services:
       MUSIC_CACHE_DIR: /cache
       GOMEMLIMIT: ${GOMEMLIMIT:-192MiB}
       GOGC: ${GOGC:-100}
-      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest/0.1.9 (+https://github.com/WHWgogogo/LyraNest)}
+      MUSIC_LOW_MEMORY: ${MUSIC_LOW_MEMORY:-0}
+      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest/0.2.0 (+https://github.com/WHWgogogo/LyraNest)}
       MUSICBRAINZ_BASE_URL: ${MUSICBRAINZ_BASE_URL:-https://musicbrainz.org}
       MUSICBRAINZ_TIMEOUT: ${MUSICBRAINZ_TIMEOUT:-20s}
       LOG_LEVEL: ${LOG_LEVEL:-info}
@@ -236,11 +237,11 @@ services:
 
 ```bash
 mkdir -p lyranest && cd lyranest
-curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNest-v0.1.9-docker-amd64.tar.gz
+curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNest-v0.2.0-docker-amd64.tar.gz
 curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/docker-compose.yml
 curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNest.env.example
-docker load -i LyraNest-v0.1.9-docker-amd64.tar.gz
-docker tag lyranest-server:0.1.9 ghcr.io/whwgogogo/lyranest-server:0.1.9
+docker load -i LyraNest-v0.2.0-docker-amd64.tar.gz
+docker tag lyranest-server:0.2.0 ghcr.io/whwgogogo/lyranest-server:0.2.0
 mkdir -p music data cache
 cp .env.example .env
 ```
@@ -254,7 +255,7 @@ cp .env.example .env
 | `DATA_DIR` | `./data` | 用户、收藏、歌单和服务端数据目录 |
 | `CACHE_DIR` | `./cache` | 服务端缓存目录 |
 | `PUID` / `PGID` | `1000` | 容器访问挂载目录时使用的主机用户 ID |
-| `LYRANEST_VERSION` | `0.1.9` | 本次离线镜像的服务端版本 |
+| `LYRANEST_VERSION` | `0.2.0` | 本次离线镜像的服务端版本 |
 
 ### 2. 启动与检查
 

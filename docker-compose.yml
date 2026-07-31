@@ -4,8 +4,8 @@
 services:
   lyranest:
     # 镜像版本由 LYRANEST_VERSION 控制。
-    # 固定版本示例：0.1.9。其他设备可直接从 GHCR 拉取该正式镜像。
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.1.9}
+    # 固定版本示例：0.2.0。其他设备可直接从 GHCR 拉取该正式镜像。
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.0}
     container_name: lyranest
     restart: unless-stopped
     init: true
@@ -30,7 +30,8 @@ services:
       MUSIC_CACHE_DIR: /cache
       GOMEMLIMIT: ${GOMEMLIMIT:-192MiB}
       GOGC: ${GOGC:-100}
-      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest/0.1.9 (+https://github.com/WHWgogogo/LyraNest)}
+      MUSIC_LOW_MEMORY: ${MUSIC_LOW_MEMORY:-0}
+      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest/0.2.0 (+https://github.com/WHWgogogo/LyraNest)}
       MUSICBRAINZ_BASE_URL: ${MUSICBRAINZ_BASE_URL:-https://musicbrainz.org}
       MUSICBRAINZ_TIMEOUT: ${MUSICBRAINZ_TIMEOUT:-20s}
       LOG_LEVEL: ${LOG_LEVEL:-info}

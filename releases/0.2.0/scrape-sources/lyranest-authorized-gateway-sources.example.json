@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "minimum_confidence": 0.75,
+  "sources": [
+    {
+      "name": "netease",
+      "enabled": false,
+      "confidence_scorer": "fuzzy_v1",
+      "search": {
+        "url": "https://licensed-gateway.example/netease/search?query={query}&limit={limit}",
+        "method": "GET",
+        "headers": {"User-Agent": "LyraNest/0.2.0"},
+        "response_mapping": {
+          "items_path": "result.songs",
+          "id_field": "id",
+          "title_field": "name",
+          "artist_field": "ar[0].name",
+          "album_field": "al.name",
+          "cover_field": "al.picUrl",
+          "duration_field": "dt",
+          "duration_unit": "ms"
+        }
+      },
+      "lyrics": {
+        "url": "https://licensed-gateway.example/netease/lyrics?id={id}",
+        "method": "GET",
+        "response_mapping": {"lrc_path": "lrc.lyric", "translated_path": "tlyric.lyric"}
+      }
+    },
+    {
+      "name": "qqmusic",
+      "enabled": false,
+      "search": {
+        "url": "https://licensed-gateway.example/qqmusic/search?query={query}&limit={limit}",
+        "method": "GET",
+        "response_mapping": {
+          "items_path": "data.song.list",
+          "id_field": "songmid",
+          "title_field": "songname",
+          "artist_field": "singer[0].name",
+          "album_field": "albumname",
+          "cover_field": "cover",
+          "duration_field": "interval",
+          "duration_unit": "seconds"
+        }
+      },
+      "lyrics": {
+        "url": "https://licensed-gateway.example/qqmusic/lyrics?id={id}",
+        "response_mapping": {"lrc_path": "lyrics"}
+      }
+    },
+    {
+      "name": "kugou",
+      "enabled": false,
+      "search": {
+        "url": "https://licensed-gateway.example/kugou/search?query={query}&limit={limit}",
+        "method": "GET",
+        "response_mapping": {
+          "items_path": "data.lists",
+          "id_field": "FileHash",
+          "title_field": "SongName",
+          "artist_field": "SingerName",
+          "album_field": "AlbumName",
+          "cover_field": "Image",
+          "duration_field": "Duration",
+          "duration_unit": "seconds"
+        }
+      },
+      "lyrics": {
+        "url": "https://licensed-gateway.example/kugou/lyrics?id={id}",
+        "response_mapping": {"lrc_path": "lyrics"}
+      }
+    }
+  ]
+}
