@@ -72,7 +72,6 @@
 <p align="center">
   <img src="releases/0.2.1/image/10.jpg" alt="LyraNest 0.2.1 账户与主题设置" width="32%" />
   <img src="releases/0.2.1/image/11.jpg" alt="LyraNest 0.2.1 多账号切换" width="32%" />
-  <img src="releases/0.2.1/image/12.jpg" alt="LyraNest 0.2.1 扫码登录" width="32%" />
 </p>
 
 <p align="center">
