@@ -5,4 +5,4 @@ e905f8aa63a62888f7dc4bc16c8975eb8209a75c5d9ef293df80c8130db1430c  LyraNest-0.2.1
 63ce48f1a7be5320b00a2a30119f3d39fb6af0906ef1bfcb2b9aaac270b13c1f  LyraNest-v0.2.1-docker-amd64.tar.gz
 bc0c4eae47d09d0ea410b1de84764d0893b2c4774dd38a61ccc257209d27bf2c  docker-compose.yml
 49f0c66f4a5f6c814ff64f45315803922c4fc186abbf7eb6ee7ffef82c978abd  LyraNest.env.example
-66b573fc99bfd599ad29751e0c77919bb02b2a41af62c696eeacbec27ca994c8  LyraNest-0.2.1-CHANGELOG.md
+197e1e76fbc349fd2a0f95b654a9adda4d9602e4834f7258b05cab00db9a80a9  LyraNest-0.2.1-CHANGELOG.md

@@ -2,27 +2,14 @@
 老规矩，新功能ui预览
 增加了浅色主题，让客户端到服务端都更加鲜活
 1.使用了新的数据库，使得对大曲库的支持更加友好
-![LyraNest 0.2.1 UI 1](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/1.jpg)
-![LyraNest 0.2.1 UI 2](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/2.jpg)
 2.增加了多用户与权限管理，这下可以与你的亲朋好友分享你的音乐库了！
 为了避免软件商业，产生不必要的风险，每位用户只能设置四个子账号哦
-![LyraNest 0.2.1 UI 3](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/3.jpg)
-![LyraNest 0.2.1 UI 4](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/4.jpg)
-![LyraNest 0.2.1 UI 5](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/5.jpg)
 3.客户端现在支持发现局域网内服务和扫码登录了！
-![LyraNest 0.2.1 UI 6](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/6.jpg)
 全新的曲库卡片
-![LyraNest 0.2.1 UI 7](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/7.jpg)
 支持按文件目录层级访问了
-![LyraNest 0.2.1 UI 8](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/8.jpg)
-![LyraNest 0.2.1 UI 9](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/9.jpg)
 新的账户登录、切换设置
-![LyraNest 0.2.1 UI 10](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/10.jpg)
-![LyraNest 0.2.1 UI 11](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/11.jpg)
 已登录的设备提供扫码登录
-![LyraNest 0.2.1 UI 12](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/12.jpg)
 独立的TV客户端
-![LyraNest 0.2.1 UI 13](https://github.com/WHWgogogo/LyraNest/raw/refs/tags/v0.2.1/releases/0.2.1/image/13.jpg)
 TV 客户端
 
 - 在这个版本，有了独立的TV客户端，现在您可以在大屏上畅销你的音乐库了！
