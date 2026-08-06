@@ -201,53 +201,38 @@ ghcr.io/whwgogogo/lyranest-server:0.2.1
 
 ```yaml
 services:
-  lyranest:
+  music-server:
     image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.1}
-    container_name: lyranest
+    container_name: lyranest-server
     restart: unless-stopped
-    init: true
-    platform: linux/amd64
-    mem_limit: ${SERVER_MEMORY_LIMIT:-256m}
-    mem_reservation: ${SERVER_MEMORY_RESERVATION:-128m}
-    security_opt:
-      - no-new-privileges:true
+    mem_limit: 256m
+    mem_reservation: 128m
     environment:
-      SERVER_ADDR: :8080
+      SERVER_ADDR: ":8080"
       MUSIC_LIBRARY_DIR: /music
       MUSIC_DATA_DIR: /data
       MUSIC_CACHE_DIR: /cache
-      GOMEMLIMIT: ${GOMEMLIMIT:-192MiB}
-      GOGC: ${GOGC:-100}
-      MEDIA_EXTRACT_CONCURRENCY: ${MEDIA_EXTRACT_CONCURRENCY:-4}
-      MEDIA_SCRAPE_CONCURRENCY: ${MEDIA_SCRAPE_CONCURRENCY:-2}
-      MUSIC_LOW_MEMORY: ${MUSIC_LOW_MEMORY:-0}
-      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest/0.2.1 (+https://github.com/WHWgogogo/LyraNest)}
-      MUSICBRAINZ_BASE_URL: ${MUSICBRAINZ_BASE_URL:-https://musicbrainz.org}
-      MUSICBRAINZ_TIMEOUT: ${MUSICBRAINZ_TIMEOUT:-20s}
-      SCRAPER_PROVIDER_CONFIG: ${SCRAPER_PROVIDER_CONFIG:-}
-      LOG_LEVEL: ${LOG_LEVEL:-info}
-      SHUTDOWN_TIMEOUT: ${SHUTDOWN_TIMEOUT:-10s}
-      AUTH_SESSION_TTL: ${AUTH_SESSION_TTL:-24h}
-      LYRANEST_DISCOVERY: ${LYRANEST_DISCOVERY:-1}
-      HTTP_PROXY: ${HTTP_PROXY:-}
-      HTTPS_PROXY: ${HTTPS_PROXY:-}
-      NO_PROXY: ${NO_PROXY:-}
+      GOMEMLIMIT: "192MiB"
+      GOGC: "100"
+      MEDIA_EXTRACT_CONCURRENCY: "4"
+      MEDIA_SCRAPE_CONCURRENCY: "2"
+      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.1"
+      MUSICBRAINZ_BASE_URL: "https://musicbrainz.org"
+      MUSICBRAINZ_TIMEOUT: "20s"
+      LOG_LEVEL: "info"
+      SHUTDOWN_TIMEOUT: "10s"
+      AUTH_SESSION_TTL: "24h"
+      LYRANEST_DISCOVERY: "1"
     ports:
-      - ${SERVER_PORT:-8080}:8080
+      - "8080:8080"
     volumes:
-      - ${MUSIC_LIBRARY_HOST_DIR:-./music}:/music:ro
-      # - /path/to/second-library:/music1:ro
-      - ${DATA_DIR:-./data}:/data:rw
-      - ${CACHE_DIR:-./cache}:/cache:rw
-    healthcheck:
-      test: ["CMD", "/usr/local/bin/music-player-server", "healthcheck"]
-      interval: 30s
-      timeout: 5s
-      retries: 5
-      start_period: 90s
+      - ./music:/music:ro
+      # - ./music1:/music1:ro
+      - ./data:/data:rw
+      - ./cache:/cache:rw
 ```
 
-如需挂载多个音乐目录，在 `volumes` 中继续添加 `/music1`、`/music2` 等只读挂载；服务端会自动发现这些目录。
+如需挂载多个音乐目录，在 `volumes` 中继续添加 `./music1:/music1:ro`、`./music2:/music2:ro` 等只读挂载；服务端会自动发现这些目录。
 
 ### 1. 在线部署
 
@@ -260,15 +245,7 @@ docker compose pull
 docker compose up -d
 ```
 
-根目录的 [`docker-compose.yml`](docker-compose.yml) 已附带中文注释。可在 `.env` 中按需修改以下项目：
-
-| 配置项 | 默认值 | 用途 |
-| --- | --- | --- |
-| `SERVER_PORT` | `8080` | 主机对外访问端口，例如 `18080` |
-| `MUSIC_LIBRARY_HOST_DIR` | `./music` | 主机音乐目录，可替换为绝对路径 |
-| `DATA_DIR` | `./data` | 用户、收藏、歌单和服务端数据目录 |
-| `CACHE_DIR` | `./cache` | 服务端缓存目录 |
-| `LYRANEST_VERSION` | `0.2.1` | 固定使用的服务端镜像版本 |
+简化版 Compose 直接使用相对目录。需要调整端口、音乐目录、数据目录或缓存目录时，直接修改 `docker-compose.yml` 中对应的 `ports` 和 `volumes` 行即可；`.env` 仅用于固定镜像版本。
 
 ### 2. GHCR 无法访问时离线部署
 
