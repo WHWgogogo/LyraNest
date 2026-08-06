@@ -1,24 +1,22 @@
+FROM scratch
+
 ARG VERSION=0.2.1
-
-FROM alpine:3.20
-
-ARG VERSION
 LABEL org.opencontainers.image.title="LyraNest-server" \
       org.opencontainers.image.description="Self-hosted LyraNest server" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.source="https://github.com/WHWgogogo/LyraNest"
 
 WORKDIR /app
-RUN apk add --no-cache ca-certificates tzdata
+COPY cacert.pem /etc/ssl/certs/ca-certificates.crt
+COPY --chmod=0755 linux-amd64/music-player-server-linux-amd64 /usr/local/bin/music-player-server
 
-COPY releases/${VERSION}/docker/linux-amd64/music-player-server-linux-amd64 /usr/local/bin/music-player-server
-RUN chmod 0755 /usr/local/bin/music-player-server
-
-ENV SERVER_ADDR=:8080 \
+ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
+    SERVER_ADDR=:8080 \
     MUSIC_LIBRARY_DIR=/music \
     MUSIC_DATA_DIR=/data \
+    MUSIC_CACHE_DIR=/cache \
     GOMEMLIMIT=192MiB \
     GOGC=100
-EXPOSE 8080
 
+EXPOSE 8080
 ENTRYPOINT ["/usr/local/bin/music-player-server"]

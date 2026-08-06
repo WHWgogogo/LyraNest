@@ -15,7 +15,7 @@
 <p align="center">
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest">下载最新版</a> ·
   <a href="#docker-compose-部署">Docker 部署</a> ·
-  <a href="releases/0.2.0/CHANGELOG.md">更新日志</a> ·
+  <a href="releases/0.2.1/CHANGELOG.md">更新日志</a> ·
   <a href="https://github.com/WHWgogogo/LyraNest-Community">开源社区版</a>
 </p>
 
@@ -23,18 +23,20 @@
 
 将音乐文件保存在自己的服务器、NAS 或电脑中，即可通过 Web、Windows 和 Android 客户端管理、播放并同步个人音乐库。
 
-当前稳定版本：`0.2.0`
+当前稳定版本：`0.2.1`
 
 交流 QQ 群：`700454910`
 
-## 0.2.0 更新摘要
+## 0.2.1 更新摘要
 
-- **跨端播放与服务端隔离**：新增跨端续播；媒体流和封面改用会话绑定短期令牌，并为每台服务器独立保存地址、登录状态和会话。
-- **Android 与歌词体验**：重构 Android 后台播放和系统媒体会话，新增通知栏进度同步；播放页、桌面歌词支持双语、A2 Enhanced LRC 和 YRC 逐字高亮。
-- **刮削与性能**：批量刮削补齐候选审核、字段选择、编辑、进度提示和重试状态，降低批量刮削内存占用并提高写入效率。
-- **正式部署包**：Windows、Android、fnOS 与 Docker Linux AMD64 发行包统一升级至 `0.2.0`。
+- **多用户与权限管理**：支持管理员和普通成员、按曲库分配访问权限；每位用户拥有独立收藏、歌单、播放记录和隐藏歌曲。
+- **TV 与扫码登录**：新增独立 Android TV 客户端，支持扫码登录、曲库切换、完整播放队列和遥控器焦点导航。
+- **全新界面与浏览方式**：新增浅色主题、按目录浏览、局域网服务发现、多账号切换、曲库卡片和自定义歌单封面。
+- **大曲库与刮削优化**：升级数据库与批量刮削流程，优化封面候选、自动应用、逐字歌词获取和大曲库性能。
+- **部署增强**：Docker Compose 支持挂载 `/music`、`/music1`、`/music2` 等多个音乐目录，fnOS 新增目录后可自动重启。
+- **正式部署包**：Windows、Android、Android TV、fnOS 与 Docker Linux AMD64 发行包统一升级至 `0.2.1`。
 
-完整升级注意事项和更新内容请查看 [`releases/0.2.0/CHANGELOG.md`](releases/0.2.0/CHANGELOG.md)。
+完整升级注意事项和更新内容请查看 [`releases/0.2.1/CHANGELOG.md`](releases/0.2.1/CHANGELOG.md)。
 
 ## 功能简介
 
@@ -46,6 +48,36 @@
 - **轻量部署**：Docker Compose 一键部署，支持音乐目录、数据目录、端口和内存限制配置。
 
 ## 界面预览
+
+### 0.2.1 新版 UI
+
+<p align="center">
+  <img src="releases/0.2.1/image/1.jpg" alt="LyraNest 0.2.1 浅色主题发现页" width="32%" />
+  <img src="releases/0.2.1/image/2.jpg" alt="LyraNest 0.2.1 通用设置" width="32%" />
+  <img src="releases/0.2.1/image/3.jpg" alt="LyraNest 0.2.1 账户设置" width="32%" />
+</p>
+
+<p align="center">
+  <img src="releases/0.2.1/image/4.jpg" alt="LyraNest 0.2.1 曲库管理" width="32%" />
+  <img src="releases/0.2.1/image/5.jpg" alt="LyraNest 0.2.1 用户与权限" width="32%" />
+  <img src="releases/0.2.1/image/6.jpg" alt="LyraNest 0.2.1 客户端登录" width="32%" />
+</p>
+
+<p align="center">
+  <img src="releases/0.2.1/image/7.jpg" alt="LyraNest 0.2.1 全新曲库卡片" width="32%" />
+  <img src="releases/0.2.1/image/8.jpg" alt="LyraNest 0.2.1 目录列表" width="32%" />
+  <img src="releases/0.2.1/image/9.jpg" alt="LyraNest 0.2.1 按目录浏览" width="32%" />
+</p>
+
+<p align="center">
+  <img src="releases/0.2.1/image/10.jpg" alt="LyraNest 0.2.1 账户与主题设置" width="32%" />
+  <img src="releases/0.2.1/image/11.jpg" alt="LyraNest 0.2.1 多账号切换" width="32%" />
+  <img src="releases/0.2.1/image/12.jpg" alt="LyraNest 0.2.1 扫码登录" width="32%" />
+</p>
+
+<p align="center">
+  <img src="releases/0.2.1/image/13.jpg" alt="LyraNest 0.2.1 TV 客户端" width="48%" />
+</p>
 
 ### 网页端
 
@@ -134,10 +166,11 @@
 
 | 文件 | 说明 |
 | --- | --- |
-| Android ARM64 APK | Android 手机、平板客户端 |
-| Windows x64 ZIP | Windows 桌面客户端 |
-| `LyraNest-0.2.0-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
-| `LyraNest-v0.2.0-docker-amd64.tar.gz` | Docker Linux AMD64 离线镜像包 |
+| `LyraNest-0.2.1-android-arm64.apk` | Android 手机、平板客户端 |
+| `LyraNest-TV-0.2.1-android-arm64.apk` | Android TV 客户端 |
+| `LyraNest-0.2.1-windows-x64.zip` | Windows 桌面客户端 |
+| `LyraNest-0.2.1-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
+| `LyraNest-v0.2.1-docker-amd64.tar.gz` | Docker Linux AMD64 离线部署包 |
 | `docker-compose.yml` | Docker Compose 部署配置 |
 | `LyraNest.env.example` | Docker 环境变量示例 |
 | `SHA256SUMS.txt` | 发行文件 SHA-256 校验值 |
@@ -145,7 +178,7 @@
 
 ## 飞牛 fnOS 原生 FPK 安装（推荐）
 
-飞牛 NAS 用户推荐从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载 `LyraNest-0.2.0-fnos-x86.fpk`，然后在飞牛应用中心使用“手动安装”导入该文件。
+飞牛 NAS 用户推荐从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载 `LyraNest-0.2.1-fnos-x86.fpk`，然后在飞牛应用中心使用“手动安装”导入该文件。
 
 安装后，在应用设置中授权音乐目录并启动 LyraNest。默认使用飞牛统一网关访问：在你平时打开飞牛管理界面的局域网地址后追加 `/app/lyranest`。
 
@@ -156,94 +189,76 @@
 服务端镜像统一命名为：
 
 ```text
-ghcr.io/whwgogogo/lyranest-server:0.2.0
+ghcr.io/whwgogogo/lyranest-server:0.2.1
 ```
 
-生产环境请固定 `LYRANEST_VERSION=0.2.0`。其他设备可直接从 GHCR 拉取该镜像；本仓库不在 Compose 中使用不确定的 Docker `latest` 标签。
+生产环境请固定 `LYRANEST_VERSION=0.2.1`。同时发布 `0.2.1` 与 `latest` 标签，其中 `latest` 指向当前稳定版 `0.2.1`。
 
 > 如果 Docker 报出 `proxyconnect tcp ... 127.0.0.1:27897: connect: connection refused`，请移除 Docker 守护进程中失效的 HTTP/HTTPS 代理后再拉取。若设备不能联网，可使用本次发行的 Docker 离线包并按下方命令导入和标记镜像。
 
 ## Docker Compose 部署
 
-根目录的 [`docker-compose.yml`](docker-compose.yml) 与发行附件均直接使用本次离线镜像；可直接保存为同名文件后执行部署：
+根目录的 [`docker-compose.yml`](docker-compose.yml) 与发行附件使用同一个正式镜像和版本：
 
 ```yaml
-# LyraNest 服务端 Docker Compose 配置
-# 建议复制 .env.example 为 .env，然后优先在 .env 中修改参数。
-
 services:
   lyranest:
-    # 镜像版本由 LYRANEST_VERSION 控制。
-    # 固定版本示例：0.2.0。其他设备可直接从 GHCR 拉取该正式镜像。
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.0}
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.1}
     container_name: lyranest
     restart: unless-stopped
     init: true
-
-    # 当前发行镜像为 Linux AMD64；ARM 服务器暂时不能直接使用此镜像。
     platform: linux/amd64
-
-    # 修改为服务器当前用户的 UID/GID，可通过 id -u 和 id -g 查询。
-    user: ${PUID:-1000}:${PGID:-1000}
-
-    # 可按服务器内存大小调整限制；默认最大 256 MB，预留 128 MB。
     mem_limit: ${SERVER_MEMORY_LIMIT:-256m}
     mem_reservation: ${SERVER_MEMORY_RESERVATION:-128m}
     security_opt:
       - no-new-privileges:true
-
     environment:
-      # 容器内部监听端口，一般不需要修改。
       SERVER_ADDR: :8080
       MUSIC_LIBRARY_DIR: /music
       MUSIC_DATA_DIR: /data
       MUSIC_CACHE_DIR: /cache
       GOMEMLIMIT: ${GOMEMLIMIT:-192MiB}
       GOGC: ${GOGC:-100}
+      MEDIA_EXTRACT_CONCURRENCY: ${MEDIA_EXTRACT_CONCURRENCY:-4}
+      MEDIA_SCRAPE_CONCURRENCY: ${MEDIA_SCRAPE_CONCURRENCY:-2}
       MUSIC_LOW_MEMORY: ${MUSIC_LOW_MEMORY:-0}
-      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest/0.2.0 (+https://github.com/WHWgogogo/LyraNest)}
+      MUSICBRAINZ_USER_AGENT: ${MUSICBRAINZ_USER_AGENT:-LyraNest/0.2.1 (+https://github.com/WHWgogogo/LyraNest)}
       MUSICBRAINZ_BASE_URL: ${MUSICBRAINZ_BASE_URL:-https://musicbrainz.org}
       MUSICBRAINZ_TIMEOUT: ${MUSICBRAINZ_TIMEOUT:-20s}
+      SCRAPER_PROVIDER_CONFIG: ${SCRAPER_PROVIDER_CONFIG:-}
       LOG_LEVEL: ${LOG_LEVEL:-info}
       SHUTDOWN_TIMEOUT: ${SHUTDOWN_TIMEOUT:-10s}
       AUTH_SESSION_TTL: ${AUTH_SESSION_TTL:-24h}
+      LYRANEST_DISCOVERY: ${LYRANEST_DISCOVERY:-1}
       HTTP_PROXY: ${HTTP_PROXY:-}
       HTTPS_PROXY: ${HTTPS_PROXY:-}
       NO_PROXY: ${NO_PROXY:-}
-
     ports:
-      # 左侧是主机访问端口，右侧 8080 是容器端口。
-      # 例如 SERVER_PORT=9090 时，访问地址为 http://服务器地址:9090。
       - ${SERVER_PORT:-8080}:8080
-
     volumes:
-      # 冒号左侧是主机目录，可以改成绝对路径；右侧容器目录不要修改。
-      # 音乐目录示例：/mnt/music:/music:ro 或 /volume1/music:/music:ro。
       - ${MUSIC_LIBRARY_HOST_DIR:-./music}:/music:ro
-      # 数据目录保存账号、收藏、歌单和服务端状态。
+      # - /path/to/second-library:/music1:ro
       - ${DATA_DIR:-./data}:/data:rw
-      # 缓存目录保存运行缓存。
       - ${CACHE_DIR:-./cache}:/cache:rw
-
     healthcheck:
       test: ["CMD", "/usr/local/bin/music-player-server", "healthcheck"]
       interval: 30s
       timeout: 5s
       retries: 5
-      start_period: 30s
+      start_period: 90s
 ```
 
-### 1. 准备目录与配置
+如需挂载多个音乐目录，在 `volumes` 中继续添加 `/music1`、`/music2` 等只读挂载；服务端会自动发现这些目录。
+
+### 1. 在线部署
 
 ```bash
 mkdir -p lyranest && cd lyranest
-curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNest-v0.2.0-docker-amd64.tar.gz
 curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/docker-compose.yml
-curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNest.env.example
-docker load -i LyraNest-v0.2.0-docker-amd64.tar.gz
-docker tag lyranest-server:0.2.0 ghcr.io/whwgogogo/lyranest-server:0.2.0
+curl -fL https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNest.env.example -o .env
 mkdir -p music data cache
-cp .env.example .env
+docker compose pull
+docker compose up -d
 ```
 
 根目录的 [`docker-compose.yml`](docker-compose.yml) 已附带中文注释。可在 `.env` 中按需修改以下项目：
@@ -254,14 +269,26 @@ cp .env.example .env
 | `MUSIC_LIBRARY_HOST_DIR` | `./music` | 主机音乐目录，可替换为绝对路径 |
 | `DATA_DIR` | `./data` | 用户、收藏、歌单和服务端数据目录 |
 | `CACHE_DIR` | `./cache` | 服务端缓存目录 |
-| `PUID` / `PGID` | `1000` | 容器访问挂载目录时使用的主机用户 ID |
-| `LYRANEST_VERSION` | `0.2.0` | 本次离线镜像的服务端版本 |
+| `LYRANEST_VERSION` | `0.2.1` | 固定使用的服务端镜像版本 |
 
-### 2. 启动与检查
+### 2. GHCR 无法访问时离线部署
+
+从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载 `LyraNest-v0.2.1-docker-amd64.tar.gz`，复制到目标设备后执行：
 
 ```bash
-docker compose pull
-docker compose up -d
+mkdir -p lyranest && tar -xzf LyraNest-v0.2.1-docker-amd64.tar.gz -C lyranest
+cd lyranest
+cp .env.example .env
+docker build --pull=false -f Dockerfile.offline -t ghcr.io/whwgogogo/lyranest-server:0.2.1 .
+mkdir -p music data cache
+docker compose up -d --pull never
+```
+
+离线包内含 Linux AMD64 服务端、CA 证书、Compose、环境变量示例和 `scratch` Dockerfile，构建过程不访问任何镜像仓库。离线部署时不要执行 `docker compose pull`；如果 NAS 图形界面会强制拉取镜像，请关闭“启动前拉取镜像”选项。
+
+### 3. 检查服务
+
+```bash
 docker compose ps
 curl http://127.0.0.1:8080/health
 ```
