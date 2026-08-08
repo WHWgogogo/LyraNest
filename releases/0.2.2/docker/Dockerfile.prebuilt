@@ -1,0 +1,26 @@
+FROM scratch
+
+LABEL org.opencontainers.image.title="LyraNest Server" \
+      org.opencontainers.image.version="0.2.2"
+
+# Scrape providers and cover art are fetched over HTTPS, which needs a trusted
+# CA list. Bundling it keeps the image self-contained: the bundle used to be
+# bind-mounted from the host, but its path differs across distributions, and a
+# missing path makes Docker mount an empty directory instead of failing — the
+# server then starts healthy while every outbound HTTPS request fails with
+# "certificate signed by unknown authority".
+#
+# The bundle ships in the build context rather than being pulled from a base
+# image, because the target host's registry mirror may not serve one.
+COPY bin/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+
+COPY --chmod=0755 bin/music-player-server-linux-amd64 /usr/local/bin/music-player-server
+COPY --chmod=0755 bin/ffmpeg-linux-amd64 /usr/local/bin/ffmpeg
+
+ENV SERVER_ADDR=:8080 \
+    FFMPEG_BINARY=/usr/local/bin/ffmpeg \
+    GOMEMLIMIT=192MiB \
+    GOGC=100
+EXPOSE 8080
+
+ENTRYPOINT ["/usr/local/bin/music-player-server"]
