@@ -255,3 +255,14 @@ curl http://127.0.0.1:8080/health
 
 - [LyraNest Community](https://github.com/WHWgogogo/LyraNest-Community)：MIT 许可的开源基础版本。
 - [LyraNest Releases](https://github.com/WHWgogogo/LyraNest/releases/latest)：完整发行版的最新下载页。
+
+
+## Star History
+
+<a href="https://www.star-history.com/?repos=WHWgogogo%2FLyraNest&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=WHWgogogo/LyraNest&type=date&theme=dark&legend=top-left&sealed_token=BFPkuSGjk3RETAbD68uyiDigKZz8HiRPhNvfUeeF43jX9EUx4dFQ-oEqkgaWsaB5AehmQkSYmLx1-XzIHtLZzRhDLkaHjEZV-jdupKibjnmtt0TxixrUmA" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=WHWgogogo/LyraNest&type=date&legend=top-left&sealed_token=BFPkuSGjk3RETAbD68uyiDigKZz8HiRPhNvfUeeF43jX9EUx4dFQ-oEqkgaWsaB5AehmQkSYmLx1-XzIHtLZzRhDLkaHjEZV-jdupKibjnmtt0TxixrUmA" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=WHWgogogo/LyraNest&type=date&legend=top-left&sealed_token=BFPkuSGjk3RETAbD68uyiDigKZz8HiRPhNvfUeeF43jX9EUx4dFQ-oEqkgaWsaB5AehmQkSYmLx1-XzIHtLZzRhDLkaHjEZV-jdupKibjnmtt0TxixrUmA" />
+ </picture>
+</a>
