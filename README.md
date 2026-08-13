@@ -15,7 +15,7 @@
 <p align="center">
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest">下载最新版</a> ·
   <a href="#docker-compose-部署">Docker 部署</a> ·
-  <a href="releases/0.2.2/CHANGELOG.md">更新日志</a> ·
+  <a href="releases/0.2.3/CHANGELOG.md">更新日志</a> ·
   <a href="https://github.com/WHWgogogo/LyraNest-Community">开源社区版</a>
 </p>
 
@@ -23,20 +23,20 @@
 
 将音乐文件保存在自己的服务器、NAS 或电脑中，即可通过 Web、Windows 和 Android 客户端管理、播放并同步个人音乐库。
 
-当前稳定版本：`0.2.2`
+当前稳定版本：`0.2.3`
 
 交流 QQ 群：`700454910`
 
-## 0.2.2 更新摘要
+## 0.2.3 更新摘要
 
-- **刮削管理**：自动刮削支持暂停、继续与取消，批量刮削队列更稳定，并修复单曲刮削搜索问题。
-- **TV 客户端**：重新设计播放页与登录页，适配 720p 小屏电视，新增 Android TV armeabi-v7a 安装包。
-- **客户端稳定性**：修复桌面歌词抖动、客户端转码播放失败和网页端播放偶现失败。
-- **服务端性能**：降低后台空闲 CPU 占用，提升大曲库扫描及批量刮削、字段应用阶段的稳定性。
-- **fnOS 集成**：支持飞牛统一网关登录、管理员首次创建 LyraNest 账户及已绑定账户自动登录。
-- **正式部署包**：Windows、Android、Android TV arm64/v7a、fnOS 与 Docker Linux AMD64 发行包统一升级至 `0.2.2`。
+- **音乐下载插件**：新增 Solara、SQMusic 插件市场，多音源搜索、音质选择、下载队列与自动入库个人下载曲库。
+- **歌单导入导出**：支持 GoMusic、TuneMySong 分享链接导入，以及 JSON/M3U 文件导入和 M3U/JSON 导出。
+- **客户端体验**：新增拼音字母轴、睡眠定时与紧凑歌词偏移条；优化离线下载文件命名、标签、封面和大列表性能。
+- **TV 与稳定性**：新增 TV 退出确认；修复目录浏览、下载队列、播放进度、桌面歌词、双语歌词和歌曲详情歌词切换问题。
+- **服务端与 fnOS**：优化大曲库权限/概览查询和下载入库，修复空闲 CPU 与曲库删除问题；fnOS 支持统一网关自动登录。
+- **正式部署包**：Windows、Android、Android TV arm64/v7a、fnOS 与 Docker Linux AMD64 发行包统一升级至 `0.2.3`。
 
-完整升级注意事项和更新内容请查看 [`releases/0.2.2/CHANGELOG.md`](releases/0.2.2/CHANGELOG.md)。
+完整升级注意事项和更新内容请查看 [`releases/0.2.3/CHANGELOG.md`](releases/0.2.3/CHANGELOG.md)。
 
 ## 功能简介
 
@@ -48,6 +48,20 @@
 - **轻量部署**：Docker Compose 一键部署，支持音乐目录、数据目录、端口和内存限制配置。
 
 ## 界面预览
+
+### 0.2.3 新功能预览
+
+<p align="center">
+  <img src="releases/0.2.3/UI%20image/1.jpg" alt="LyraNest 0.2.3 下载插件入口" width="32%" />
+  <img src="releases/0.2.3/UI%20image/2.jpg" alt="LyraNest 0.2.3 插件中心配置" width="32%" />
+  <img src="releases/0.2.3/UI%20image/3.jpg" alt="LyraNest 0.2.3 插件中心" width="32%" />
+</p>
+
+<p align="center">
+  <img src="releases/0.2.3/UI%20image/4.jpg" alt="LyraNest 0.2.3 插件市场" width="32%" />
+  <img src="releases/0.2.3/UI%20image/5.jpg" alt="LyraNest 0.2.3 下载搜索" width="32%" />
+  <img src="releases/0.2.3/UI%20image/6.jpg" alt="LyraNest 0.2.3 下载队列" width="32%" />
+</p>
 
 ### 网页端
 
@@ -136,20 +150,18 @@
 
 | 文件 | 说明 |
 | --- | --- |
-| `LyraNest-0.2.2-android-arm64.apk` | Android 手机、平板客户端 |
-| `LyraNest-TV-0.2.2-arm64-v8a.apk` | Android TV ARM64 客户端 |
-| `LyraNest-TV-0.2.2-armeabi-v7a.apk` | Android TV ARMv7 客户端 |
-| `LyraNest-0.2.2-windows-x64.zip` | Windows 桌面客户端 |
-| `LyraNest-0.2.2-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
-| `LyraNest-v0.2.2-docker-amd64.tar.gz` | Docker Linux AMD64 离线镜像包 |
+| `LyraNest-0.2.3-android-arm64.apk` | Android 手机、平板客户端 |
+| `LyraNest-TV-0.2.3-arm64-v8a.apk` | Android TV ARM64 客户端 |
+| `LyraNest-TV-0.2.3-armeabi-v7a.apk` | Android TV ARMv7 客户端 |
+| `LyraNest-0.2.3-windows-x64.zip` | Windows 桌面客户端 |
+| `LyraNest-0.2.3-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
+| `LyraNest-v0.2.3-docker-amd64.tar.gz` | Docker Linux AMD64 离线镜像包 |
 | `docker-compose.yml` | Docker Compose 部署配置 |
 | `LyraNest.env.example` | Docker 环境变量示例 |
-| `SHA256SUMS.txt` | 发行文件 SHA-256 校验值 |
-| `SHA256SUMS-fnOS.txt` | 飞牛 fnOS FPK 的 SHA-256 校验值 |
 
 ## 飞牛 fnOS 原生 FPK 安装（推荐）
 
-飞牛 NAS 用户推荐从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载 `LyraNest-0.2.2-fnos-x86.fpk`，然后在飞牛应用中心使用“手动安装”导入该文件。
+飞牛 NAS 用户推荐从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载 `LyraNest-0.2.3-fnos-x86.fpk`，然后在飞牛应用中心使用“手动安装”导入该文件。
 
 安装后，在应用设置中授权音乐目录并启动 LyraNest。默认使用飞牛统一网关访问：在你平时打开飞牛管理界面的局域网地址后追加 `/app/lyranest`。
 
@@ -160,10 +172,10 @@
 服务端镜像统一命名为：
 
 ```text
-ghcr.io/whwgogogo/lyranest-server:0.2.2
+ghcr.io/whwgogogo/lyranest-server:0.2.3
 ```
 
-生产环境请固定 `LYRANEST_VERSION=0.2.2`。同时发布 `0.2.2` 与 `latest` 标签，其中 `latest` 指向当前稳定版 `0.2.2`。
+生产环境请固定 `LYRANEST_VERSION=0.2.3`。同时发布 `0.2.3` 与 `latest` 标签，其中 `latest` 指向当前稳定版 `0.2.3`。
 
 > 如果 Docker 报出 `proxyconnect tcp ... 127.0.0.1:27897: connect: connection refused`，请移除 Docker 守护进程中失效的 HTTP/HTTPS 代理后再拉取。若设备不能联网，可使用本次发行的 Docker 离线包并按下方命令导入和标记镜像。
 
@@ -174,7 +186,7 @@ ghcr.io/whwgogogo/lyranest-server:0.2.2
 ```yaml
 services:
   music-server:
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.2}
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.3}
     container_name: lyranest-server
     restart: unless-stopped
     mem_limit: 256m
@@ -182,13 +194,16 @@ services:
     environment:
       SERVER_ADDR: ":8080"
       MUSIC_LIBRARY_DIR: /music
+      MUSIC_LIBRARY_ROOTS: "/music:/downloads"
       MUSIC_DATA_DIR: /data
       MUSIC_CACHE_DIR: /cache
+      DOWNLOADS_ROOT: /downloads
+      PROVIDER_CREDENTIAL_KEY: "${PROVIDER_CREDENTIAL_KEY:-}"
       GOMEMLIMIT: "192MiB"
       GOGC: "100"
       MEDIA_EXTRACT_CONCURRENCY: "4"
       MEDIA_SCRAPE_CONCURRENCY: "2"
-      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.2"
+      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.3 (+https://github.com/WHWgogogo/LyraNest)"
       MUSICBRAINZ_BASE_URL: "https://musicbrainz.org"
       MUSICBRAINZ_TIMEOUT: "20s"
       LOG_LEVEL: "info"
@@ -200,6 +215,7 @@ services:
     volumes:
       - ./music:/music:ro
       # - ./music1:/music1:ro
+      - ./downloads:/downloads:rw
       - ./data:/data:rw
       - ./cache:/cache:rw
 ```
@@ -212,7 +228,7 @@ services:
 mkdir -p lyranest && cd lyranest
 curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/docker-compose.yml
 curl -fL https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNest.env.example -o .env
-mkdir -p music data cache
+mkdir -p music downloads data cache
 docker compose pull
 docker compose up -d
 ```
@@ -221,15 +237,14 @@ docker compose up -d
 
 ### 2. GHCR 无法访问时离线部署
 
-从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载 `LyraNest-v0.2.2-docker-amd64.tar.gz`、`docker-compose.yml` 和 `LyraNest.env.example`，复制到目标设备同一目录后执行：
+从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载 `LyraNest-v0.2.3-docker-amd64.tar.gz`、`docker-compose.yml` 和 `LyraNest.env.example`，复制到目标设备同一目录后执行：
 
 ```bash
 mkdir -p lyranest && cd lyranest
-docker load -i LyraNest-v0.2.2-docker-amd64.tar.gz
-docker tag docker.io/library/lyranest-server:0.2.2 ghcr.io/whwgogogo/lyranest-server:0.2.2
+docker load -i LyraNest-v0.2.3-docker-amd64.tar.gz
+docker tag lyranest-server:prebuilt ghcr.io/whwgogogo/lyranest-server:0.2.3
 curl -fL https://github.com/WHWgogogo/LyraNest/releases/latest/download/LyraNest.env.example -o .env
-mkdir -p music data cache
-cd lyranest
+mkdir -p music downloads data cache
 docker compose up -d --pull never
 ```
 
@@ -248,7 +263,7 @@ curl http://127.0.0.1:8080/health
 
 - 每个版本都保留独立 GitHub Release 与附件，不会覆盖旧版本。
 - README 的下载入口使用 GitHub `releases/latest`，始终指向最新稳定发行。
-- 下载完成后可用对应的 `SHA256SUMS.txt` 或 `SHA256SUMS-fnOS.txt` 校验文件完整性。
+- GitHub Release 附件页会显示每个附件的 SHA-256 摘要，可直接用于校验下载文件完整性。
 - 详细更新内容请查看对应版本的 `CHANGELOG.md`。
 
 ## 相关项目
@@ -266,3 +281,17 @@ curl http://127.0.0.1:8080/health
    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=WHWgogogo/LyraNest&type=date&legend=top-left&sealed_token=BFPkuSGjk3RETAbD68uyiDigKZz8HiRPhNvfUeeF43jX9EUx4dFQ-oEqkgaWsaB5AehmQkSYmLx1-XzIHtLZzRhDLkaHjEZV-jdupKibjnmtt0TxixrUmA" />
  </picture>
 </a>
+
+## 感谢赞助
+
+感谢每一位为 LyraNest 为爱发电的朋友。你们的支持让项目能够持续维护、修复问题并带来更多功能。
+
+<p align="center">
+  <img src="releases/0.2.3/%E4%B8%BA%E7%88%B1%E5%8F%91%E7%94%B5image/DDT.jpg" alt="DDT" width="56" height="56" />
+  <img src="releases/0.2.3/%E4%B8%BA%E7%88%B1%E5%8F%91%E7%94%B5image/Heartless.jpg" alt="Heartless" width="56" height="56" />
+  <img src="releases/0.2.3/%E4%B8%BA%E7%88%B1%E5%8F%91%E7%94%B5image/%E7%8E%A9%E7%94%B5%E7%9A%84%E5%B0%8F%E5%AD%A9%E0%B2%A5_%E0%B2%A5.jpg" alt="玩电的小孩ಥ_ಥ" width="56" height="56" />
+</p>
+
+<p align="center">DDT · Heartless · 玩电的小孩ಥ_ಥ</p>
+
+感谢你们的信任与鼓励，也感谢每一位使用、反馈和传播 LyraNest 的朋友。
