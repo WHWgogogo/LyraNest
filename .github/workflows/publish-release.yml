@@ -11,46 +11,52 @@ permissions:
 
 jobs:
   release:
+    needs: container
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Prepare release assets
+      - name: Validate release assets
         shell: bash
         run: |
           set -euo pipefail
           VERSION="${GITHUB_REF_NAME#v}"
           SOURCE_DIR="releases/${VERSION}"
-          test -f "${SOURCE_DIR}/LyraNest-Android-arm64-${VERSION}.apk"
-          test -f "${SOURCE_DIR}/LyraNest-Windows-x64-${VERSION}.zip"
-          mkdir -p release-assets
-          cp "${SOURCE_DIR}/LyraNest-Android-arm64-${VERSION}.apk" release-assets/LyraNest-Android-arm64.apk
-          cp "${SOURCE_DIR}/LyraNest-Windows-x64-${VERSION}.zip" release-assets/LyraNest-Windows-x64.zip
-          cp docker-compose.yml release-assets/docker-compose.yml
-          cp .env.example release-assets/LyraNest.env.example
-          (
-            cd release-assets
-            sha256sum LyraNest-Android-arm64.apk LyraNest-Windows-x64.zip docker-compose.yml LyraNest.env.example > SHA256SUMS.txt
+          assets=(
+            "${SOURCE_DIR}/LyraNest-${VERSION}-android-arm64.apk"
+            "${SOURCE_DIR}/LyraNest-${VERSION}-tv-arm64-v8a.apk"
+            "${SOURCE_DIR}/LyraNest-${VERSION}-tv-armeabi-v7a.apk"
+            "${SOURCE_DIR}/LyraNest-${VERSION}-windows-x64.zip"
+            "${SOURCE_DIR}/LyraNest-${VERSION}-fnos-x86.fpk"
+            "${SOURCE_DIR}/LyraNest-${VERSION}-fnos-arm.fpk"
+            "${SOURCE_DIR}/LyraNest-Compat-${VERSION}-fnos-x86.fpk"
+            "${SOURCE_DIR}/LyraNest-Compat-${VERSION}-fnos-arm.fpk"
+            "${SOURCE_DIR}/LyraNest-${VERSION}-docker-linux-amd64.tar.gz"
+            "${SOURCE_DIR}/LyraNest-${VERSION}-docker-linux-arm64.tar.gz"
+            "docker-compose.yml"
           )
+          for asset in "${assets[@]}"; do
+            test -f "${asset}"
+          done
+          printf '%s\n' "${assets[@]}" > release-assets.txt
           echo "VERSION=${VERSION}" >> "${GITHUB_ENV}"
 
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
         run: |
+          set -euo pipefail
           if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
-            gh release edit "${GITHUB_REF_NAME}" \
-              --latest \
-              --title "LyraNest ${VERSION}" \
-              --notes-file "releases/${VERSION}/CHANGELOG.md"
-            gh release upload "${GITHUB_REF_NAME}" release-assets/* --clobber
-          else
-            gh release create "${GITHUB_REF_NAME}" release-assets/* \
-              --verify-tag \
-              --latest \
-              --title "LyraNest ${VERSION}" \
-              --notes-file "releases/${VERSION}/CHANGELOG.md"
+            echo "Release ${GITHUB_REF_NAME} already exists; refusing to overwrite it." >&2
+            exit 1
           fi
+          mapfile -t assets < release-assets.txt
+          gh release create "${GITHUB_REF_NAME}" "${assets[@]}" \
+            --verify-tag \
+            --latest \
+            --title "LyraNest v${VERSION}" \
+            --notes-file "releases/${VERSION}/CHANGELOG.md"
 
   container:
     runs-on: ubuntu-latest
@@ -74,7 +80,7 @@ jobs:
         with:
           context: .
           file: Dockerfile.release
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: true
           build-args: |
             VERSION=${{ steps.version.outputs.value }}
