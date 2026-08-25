@@ -16,7 +16,7 @@
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest">下载最新版</a> ·
   <a href="https://lyranest.dpdns.org/">官网</a> ·
   <a href="#docker-compose-部署">Docker 部署</a> ·
-  <a href="releases/0.2.4/CHANGELOG.md">更新日志</a> ·
+  <a href="releases/0.2.5/CHANGELOG.md">更新日志</a> ·
   <a href="https://github.com/WHWgogogo/LyraNest-Community">开源社区版</a>
 </p>
 
@@ -24,22 +24,20 @@
 
 将音乐文件保存在自己的服务器、NAS 或电脑中，即可通过 Web、Windows 和 Android 客户端管理、播放并同步个人音乐库。
 
-当前稳定版本：`0.2.4`
+当前稳定版本：`0.2.5`
 
 交流 QQ 群：`700454910`
 
-## 0.2.4 更新摘要
+## 0.2.5 更新摘要
 
-- **曲库字母轴修复**：修复曲库字母轴在弱网、连续点击字母、切换排序或刷新时可能跳到错误位置的问题；旧分页请求不再覆盖最新跳转结果。
-- **浏览体验**：继续保留字母跳转后的前一页内容，向上滑动仍可查看该字母之前的曲目。
-- **Android 播放**：恢复后台播放时的退出二次确认，并完善播放页歌词与曲目信息入口。
-- **稳定性**：完善响应式封面、曲库分页、下载/离线页面与目录封面的稳定性修复。
-- **服务端**：发行镜像内置 FFmpeg，转码能力可用时由服务端提前声明；同时保留客户端对旧服务端的兼容行为。
-- **歌词与歌单**：歌词搜索、歌单导入导出、插件中心、下载插件与下载队列相关功能继续包含在 0.2.4 中。
-- **正式部署包**：Windows、Android、Android TV arm64/v7a、fnOS（x86/ARM 标准版与兼容版）与 Docker Linux AMD64/ARM64 发行包统一升级至 `0.2.4`。
+- **有声书模式**：首次支持 Web、Android 与 Windows 的有声书模式，可在设置中开关；支持跨设备同步书籍、章节与播放进度，并支持有声书刮削插件。
+- **播放与歌词**：播放页支持单行、双行与三行歌词显示；增强型 LRC 逐字歌词、LDDC 歌词文件、完整歌词页、桌面歌词与系统媒体控制的状态显示更加统一。
+- **曲库体验**：修复按字母快速定位歌曲部分情况下失效的问题，优化分页、封面加载和大曲库滚动，减少连续操作时的错位与等待。
+- **设置与外观**：新增简洁模式、紧凑模式和字母轴背景透明度设置；发现页新增最近入库歌曲，播放列表与添加歌曲弹窗适配浅色主题。
+- **服务端管理**：修复音乐和有声书后台入库状态显示，优化标签提取与转码能力；后台入库支持暂停、继续、取消，媒体处理并行度支持热调整。
+- **正式部署包**：Android、Windows、fnOS（x86/ARM 标准版与兼容版）、Docker 镜像归档及 Docker 部署包统一升级至 `0.2.5`。
 
-完整升级注意事项和更新内容请查看 [`releases/0.2.4/CHANGELOG.md`](releases/0.2.4/CHANGELOG.md)。
-
+完整升级注意事项和更新内容请查看 [`releases/0.2.5/CHANGELOG.md`](releases/0.2.5/CHANGELOG.md)。
 ## 功能简介
 
 - **多端音乐库**：Web、Windows、Android 共用服务端曲库、收藏、歌单与播放队列。
@@ -152,20 +150,20 @@
 
 | 文件 | 说明 |
 | --- | --- |
-| `LyraNest-0.2.4-android-arm64.apk` | Android 手机、平板客户端 |
-| `LyraNest-0.2.4-tv-arm64-v8a.apk` | Android TV ARM64 客户端 |
-| `LyraNest-0.2.4-tv-armeabi-v7a.apk` | Android TV ARMv7 客户端 |
-| `LyraNest-0.2.4-windows-x64.zip` | Windows 桌面客户端 |
-| `LyraNest-0.2.4-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
-| `LyraNest-0.2.4-fnos-arm.fpk` | 飞牛 fnOS ARM 原生安装包 |
-| `LyraNest-Compat-0.2.4-fnos-x86.fpk` | fnOS x86 兼容版（不依赖统一网关） |
-| `LyraNest-Compat-0.2.4-fnos-arm.fpk` | fnOS ARM 兼容版（不依赖统一网关） |
-| `LyraNest-0.2.4-docker-linux-amd64.tar.gz` | Docker Linux AMD64 离线部署包 |
-| `LyraNest-0.2.4-docker-linux-arm64.tar.gz` | Docker Linux ARM64 离线部署包 |
+| `LyraNest-0.2.5-android-arm64.apk` | Android 手机、平板客户端 |
+| `LyraNest-0.2.5-windows-x64.zip` | Windows 桌面客户端 |
+| `LyraNest-0.2.5-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
+| `LyraNest-0.2.5-fnos-arm.fpk` | 飞牛 fnOS ARM 原生安装包 |
+| `LyraNest-Compat-0.2.5-fnos-x86.fpk` | fnOS x86 兼容版（不依赖统一网关） |
+| `LyraNest-Compat-0.2.5-fnos-arm.fpk` | fnOS ARM 兼容版（不依赖统一网关） |
+| `LyraNest-0.2.5-docker-image-linux-amd64.tar.gz` | Docker Linux AMD64 离线镜像归档（`docker load`） |
+| `LyraNest-0.2.5-docker-image-linux-arm64.tar.gz` | Docker Linux ARM64 离线镜像归档（`docker load`） |
+| `LyraNest-0.2.5-docker-linux-amd64.tar.gz` | Docker Linux AMD64 预构建部署包 |
+| `LyraNest-0.2.5-docker-linux-arm64.tar.gz` | Docker Linux ARM64 预构建部署包 |
 | `docker-compose.yml` | Docker Compose 在线部署配置 |
 ## 飞牛 fnOS 原生 FPK 安装（推荐）
 
-飞牛 NAS 用户请从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应架构的 FPK：x86_64 使用 `LyraNest-0.2.4-fnos-x86.fpk`，ARM64 使用 `LyraNest-0.2.4-fnos-arm.fpk`；标准版与兼容版二选一，不可同时安装。
+飞牛 NAS 用户请从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应架构的 FPK：x86_64 使用 `LyraNest-0.2.5-fnos-x86.fpk`，ARM64 使用 `LyraNest-0.2.5-fnos-arm.fpk`；标准版与兼容版二选一，不可同时安装。
 
 安装后，在应用设置中授权音乐目录并启动 LyraNest。默认使用飞牛统一网关访问：在你平时打开飞牛管理界面的局域网地址后追加 `/app/lyranest`。
 
@@ -176,10 +174,10 @@
 服务端镜像统一命名为：
 
 ```text
-ghcr.io/whwgogogo/lyranest-server:0.2.4
+ghcr.io/whwgogogo/lyranest-server:0.2.5
 ```
 
-生产环境请固定 `LYRANEST_VERSION=0.2.4`。同时发布 `0.2.4` 与 `latest` 标签，其中 `latest` 指向当前稳定版 `0.2.4`。
+生产环境请固定 `LYRANEST_VERSION=0.2.5`。同时发布 `0.2.5` 与 `latest` 标签，其中 `latest` 指向当前稳定版 `0.2.5`。
 
 > 如果 Docker 报出 `proxyconnect tcp ... 127.0.0.1:27897: connect: connection refused`，请移除 Docker 守护进程中失效的 HTTP/HTTPS 代理后再拉取。若设备不能联网，可使用本次发行的 Docker 离线包并按下方命令导入和标记镜像。
 
@@ -190,7 +188,7 @@ ghcr.io/whwgogogo/lyranest-server:0.2.4
 ```yaml
 services:
   music-server:
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.4}
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.5}
     container_name: lyranest-server
     restart: unless-stopped
     mem_limit: 256m
@@ -207,7 +205,7 @@ services:
       GOGC: "100"
       MEDIA_EXTRACT_CONCURRENCY: "4"
       MEDIA_SCRAPE_CONCURRENCY: "2"
-      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.4 (+https://github.com/WHWgogogo/LyraNest)"
+      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.5 (+https://github.com/WHWgogogo/LyraNest)"
       MUSICBRAINZ_BASE_URL: "https://musicbrainz.org"
       MUSICBRAINZ_TIMEOUT: "20s"
       LOG_LEVEL: "info"
@@ -240,17 +238,17 @@ docker compose up -d
 
 ### 2. GHCR 无法访问时离线部署
 
-从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载与设备架构匹配的离线部署包：AMD64 使用 `LyraNest-0.2.4-docker-linux-amd64.tar.gz`，ARM64 使用 `LyraNest-0.2.4-docker-linux-arm64.tar.gz`。
+优先下载与设备架构匹配的 Docker 镜像归档：AMD64 使用 `LyraNest-0.2.5-docker-image-linux-amd64.tar.gz`，ARM64 使用 `LyraNest-0.2.5-docker-image-linux-arm64.tar.gz`。
 
 ```bash
-tar -xzf LyraNest-0.2.4-docker-linux-amd64.tar.gz
-cd LyraNest-0.2.4-docker-linux-amd64
+docker load -i LyraNest-0.2.5-docker-image-linux-amd64.tar.gz
+docker tag lyranest-server:0.2.5-amd64 ghcr.io/whwgogogo/lyranest-server:0.2.5
+curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/docker-compose.yml
 mkdir -p music downloads data cache
-docker compose up -d --build --pull never
+docker compose up -d --pull never
 ```
 
-离线部署包已包含对应架构的服务端二进制与 Dockerfile，无需访问 GHCR，也不要执行 `docker compose pull`。启动前请按实际情况修改 `docker-compose.yml` 中的目录挂载；如果 NAS 图形界面会强制拉取镜像，请关闭“启动前拉取镜像”选项。
-
+镜像归档无需访问 GHCR；ARM64 设备将示例中的 `amd64` 改为 `arm64`。部署包 `LyraNest-0.2.5-docker-linux-amd64.tar.gz` / `LyraNest-0.2.5-docker-linux-arm64.tar.gz` 则包含预构建服务端、Dockerfile 与部署 Compose，适用于需要自行调整部署配置的场景。离线启动时不要执行 `docker compose pull`；如果 NAS 图形界面会强制拉取镜像，请关闭“启动前拉取镜像”选项。
 ### 3. 检查服务
 
 ```bash

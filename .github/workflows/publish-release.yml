@@ -24,17 +24,24 @@ jobs:
           SOURCE_DIR="releases/${VERSION}"
           assets=(
             "${SOURCE_DIR}/LyraNest-${VERSION}-android-arm64.apk"
-            "${SOURCE_DIR}/LyraNest-${VERSION}-tv-arm64-v8a.apk"
-            "${SOURCE_DIR}/LyraNest-${VERSION}-tv-armeabi-v7a.apk"
             "${SOURCE_DIR}/LyraNest-${VERSION}-windows-x64.zip"
             "${SOURCE_DIR}/LyraNest-${VERSION}-fnos-x86.fpk"
             "${SOURCE_DIR}/LyraNest-${VERSION}-fnos-arm.fpk"
             "${SOURCE_DIR}/LyraNest-Compat-${VERSION}-fnos-x86.fpk"
             "${SOURCE_DIR}/LyraNest-Compat-${VERSION}-fnos-arm.fpk"
+            "${SOURCE_DIR}/LyraNest-${VERSION}-docker-image-linux-amd64.tar.gz"
+            "${SOURCE_DIR}/LyraNest-${VERSION}-docker-image-linux-arm64.tar.gz"
             "${SOURCE_DIR}/LyraNest-${VERSION}-docker-linux-amd64.tar.gz"
             "${SOURCE_DIR}/LyraNest-${VERSION}-docker-linux-arm64.tar.gz"
             "docker-compose.yml"
           )
+          for optional_asset in \
+            "${SOURCE_DIR}/LyraNest-${VERSION}-tv-arm64-v8a.apk" \
+            "${SOURCE_DIR}/LyraNest-${VERSION}-tv-armeabi-v7a.apk"; do
+            if [[ -f "${optional_asset}" ]]; then
+              assets+=("${optional_asset}")
+            fi
+          done
           for asset in "${assets[@]}"; do
             test -f "${asset}"
           done

@@ -1,8 +1,20 @@
 services:
+  abs-ximalaya:
+    image: shanyanwcx/abs-ximalaya:latest
+    container_name: lyranest-abs-ximalaya
+    restart: unless-stopped
+    environment:
+      PORT: "7814"
+      TZ: "Asia/Shanghai"
+    ports:
+      - "7814:7814"
+
   music-server:
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.4}
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.5}
     container_name: lyranest-server
     restart: unless-stopped
+    depends_on:
+      - abs-ximalaya
     mem_limit: 256m
     mem_reservation: 128m
 
@@ -18,7 +30,7 @@ services:
       GOGC: "100"
       MEDIA_EXTRACT_CONCURRENCY: "4"
       MEDIA_SCRAPE_CONCURRENCY: "2"
-      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.4 (+https://github.com/WHWgogogo/LyraNest)"
+      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.5 (+https://github.com/WHWgogogo/LyraNest)"
       MUSICBRAINZ_BASE_URL: "https://musicbrainz.org"
       MUSICBRAINZ_TIMEOUT: "20s"
       LOG_LEVEL: "info"
@@ -28,6 +40,7 @@ services:
 
     ports:
       - "8080:8080"
+      - "${LYRANEST_DISCOVERY_PROBE_PORT:-19001}:19001/udp"
 
     volumes:
       - ./music:/music:ro
