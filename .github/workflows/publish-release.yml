@@ -29,8 +29,6 @@ jobs:
             "${SOURCE_DIR}/LyraNest-${VERSION}-fnos-arm.fpk"
             "${SOURCE_DIR}/LyraNest-Compat-${VERSION}-fnos-x86.fpk"
             "${SOURCE_DIR}/LyraNest-Compat-${VERSION}-fnos-arm.fpk"
-            "${SOURCE_DIR}/LyraNest-${VERSION}-docker-image-linux-amd64.tar.gz"
-            "${SOURCE_DIR}/LyraNest-${VERSION}-docker-image-linux-arm64.tar.gz"
             "${SOURCE_DIR}/LyraNest-${VERSION}-docker-linux-amd64.tar.gz"
             "${SOURCE_DIR}/LyraNest-${VERSION}-docker-linux-arm64.tar.gz"
             "docker-compose.yml"
