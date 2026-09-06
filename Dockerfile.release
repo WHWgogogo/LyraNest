@@ -1,4 +1,4 @@
-ARG VERSION=0.2.5
+ARG VERSION=0.2.6
 
 FROM alpine:3.20
 

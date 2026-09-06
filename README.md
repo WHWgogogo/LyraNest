@@ -16,7 +16,7 @@
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest">下载最新版</a> ·
   <a href="https://lyranest.dpdns.org/">官网</a> ·
   <a href="#docker-compose-部署">Docker 部署</a> ·
-  <a href="releases/0.2.5/CHANGELOG.md">更新日志</a> ·
+  <a href="releases/0.2.6/RELEASE_NOTES_zh-CN.txt">更新日志</a> ·
   <a href="https://github.com/WHWgogogo/LyraNest-Community">开源社区版</a>
 </p>
 
@@ -24,20 +24,48 @@
 
 将音乐文件保存在自己的服务器、NAS 或电脑中，即可通过 Web、Windows 和 Android 客户端管理、播放并同步个人音乐库。
 
-当前稳定版本：`0.2.5`
+当前稳定版本：`0.2.6`
 
 交流 QQ 群：`700454910`
 
-## 0.2.5 更新摘要
+## 0.2.6 更新日志
 
-- **有声书模式**：首次支持 Web、Android 与 Windows 的有声书模式，可在设置中开关；支持跨设备同步书籍、章节与播放进度，并支持有声书刮削插件。
-- **播放与歌词**：播放页支持单行、双行与三行歌词显示；增强型 LRC 逐字歌词、LDDC 歌词文件、完整歌词页、桌面歌词与系统媒体控制的状态显示更加统一。
-- **曲库体验**：修复按字母快速定位歌曲部分情况下失效的问题，优化分页、封面加载和大曲库滚动，减少连续操作时的错位与等待。
-- **设置与外观**：新增简洁模式、紧凑模式和字母轴背景透明度设置；发现页新增最近入库歌曲，播放列表与添加歌曲弹窗适配浅色主题。
-- **服务端管理**：修复音乐和有声书后台入库状态显示，优化标签提取与转码能力；后台入库支持暂停、继续、取消，媒体处理并行度支持热调整。
-- **正式部署包**：Android、Windows、fnOS（x86/ARM 标准版与兼容版）、Docker 镜像归档及 Docker 部署包统一升级至 `0.2.5`。
+### 新增功能
 
-完整升级注意事项和更新内容请查看 [`releases/0.2.5/CHANGELOG.md`](releases/0.2.5/CHANGELOG.md)。
+- **Windows 标题栏与托盘**：新增沉浸式标题栏，窗口外观会跟随深色、浅色主题；新增系统托盘后台驻留，可在托盘中播放、暂停、切换歌曲，并开关或锁定桌面歌词。
+- **Android 通知栏**：新增通知栏标题与歌词互换开关，可按个人偏好调整锁屏和通知栏显示。
+- **音频信息与批量操作**：播放页和歌曲详情显示采样率；曲库的列表、图标和详细模式支持批量全选、收藏、下载和加入播放队列。
+- **TV 与小爱音响**：TV 端全新重构并支持有声书；新增 [LyraNest Xiaomi Bridge](https://github.com/WHWgogogo/LyraNest-Xiaomi-Bridge)，可使用小爱音响语音播放 NAS 中的音乐。
+
+### 播放与歌词
+
+- 修复 Android 在局域网播放时启动慢、长时间缓冲的问题。
+- 修复转码播放拖动进度后跳回开头、总时长不显示和听歌记录不准确的问题。
+- 修复部分 FLAC 歌曲在播放页显示“未知格式”的问题。
+- 改进 Windows 桌面歌词渐变效果，修复 Android 桌面歌词从左到右填充不生效的问题，并统一不同平台的歌词渐变和逐字填充表现。
+- 修复浅色主题下播放列表文字不清晰的问题。
+
+### 下载与稳定性
+
+- 提升 Android 自定义下载目录的下载速度，减少下载时的界面卡顿。
+- 优化大文件校验、断点续传和多任务下载的稳定性。
+- 修复 Android 缓存配额自行变化、自定义滑块无法正常调整的问题。
+- 登录状态改为长期保持，减少日常使用中的重复登录。
+- 修复局域网自动发现后连接到错误地址的问题，旧版服务端也可以正常发现。
+
+### 有声书与 Web
+
+- 修复 Web 端有声书切换章节后倍速恢复为 1 倍的问题，刷新页面后也会保留倍速。
+- 完善 Web 端有声书倍速、定时和底部播放控件的深色模式。
+- 修复音乐模式下误显示有声书曲库的问题。
+
+### Windows 与 TV
+
+- 修复 Windows 最小化、最大化和关闭按钮无响应或位置跳动的问题，补齐设置页及子页面的返回操作。
+- 改进托盘隐藏、再次启动唤醒和真正退出时的稳定性。
+- TV 端新增逐字动态歌词、双语对照歌词和有声书播放。
+
+完整更新记录请查看 [`releases/0.2.6/RELEASE_NOTES_zh-CN.txt`](releases/0.2.6/RELEASE_NOTES_zh-CN.txt)。
 ## 功能简介
 
 - **多端音乐库**：Web、Windows、Android 共用服务端曲库、收藏、歌单与播放队列。
@@ -150,20 +178,20 @@
 
 | 文件 | 说明 |
 | --- | --- |
-| `LyraNest-0.2.5-android-arm64.apk` | Android 手机、平板客户端 |
-| `LyraNest-0.2.5-windows-x64.zip` | Windows 桌面客户端 |
-| `LyraNest-0.2.5-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
-| `LyraNest-0.2.5-fnos-arm.fpk` | 飞牛 fnOS ARM 原生安装包 |
-| `LyraNest-Compat-0.2.5-fnos-x86.fpk` | fnOS x86 兼容版（不依赖统一网关） |
-| `LyraNest-Compat-0.2.5-fnos-arm.fpk` | fnOS ARM 兼容版（不依赖统一网关） |
-| `LyraNest-0.2.5-docker-image-linux-amd64.tar.gz` | Docker Linux AMD64 离线镜像归档（`docker load`） |
-| `LyraNest-0.2.5-docker-image-linux-arm64.tar.gz` | Docker Linux ARM64 离线镜像归档（`docker load`） |
-| `LyraNest-0.2.5-docker-linux-amd64.tar.gz` | Docker Linux AMD64 预构建部署包 |
-| `LyraNest-0.2.5-docker-linux-arm64.tar.gz` | Docker Linux ARM64 预构建部署包 |
+| `LyraNest-0.2.6-android-arm64.apk` | Android 手机、平板客户端 |
+| `LyraNest-0.2.6-windows-x64.zip` | Windows 桌面客户端 |
+| `LyraNest-0.2.6-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
+| `LyraNest-0.2.6-fnos-arm.fpk` | 飞牛 fnOS ARM 原生安装包 |
+| `LyraNest-TV-0.2.6-arm64-v8a.apk` | Android TV ARM64 客户端 |
+| `LyraNest-TV-0.2.6-armeabi-v7a.apk` | Android TV ARM32 客户端 |
+| `LyraNest-Compat-0.2.6-fnos-x86.fpk` | fnOS x86 兼容版（不依赖统一网关） |
+| `LyraNest-Compat-0.2.6-fnos-arm.fpk` | fnOS ARM 兼容版（不依赖统一网关） |
+| `LyraNest-0.2.6-docker-linux-amd64.tar.gz` | Docker Linux AMD64 离线镜像归档（`docker load`） |
+| `LyraNest-0.2.6-docker-linux-arm64.tar.gz` | Docker Linux ARM64 离线镜像归档（`docker load`） |
 | `docker-compose.yml` | Docker Compose 在线部署配置 |
 ## 飞牛 fnOS 原生 FPK 安装（推荐）
 
-飞牛 NAS 用户请从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应架构的 FPK：x86_64 使用 `LyraNest-0.2.5-fnos-x86.fpk`，ARM64 使用 `LyraNest-0.2.5-fnos-arm.fpk`；标准版与兼容版二选一，不可同时安装。
+飞牛 NAS 用户请从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应架构的 FPK：x86_64 使用 `LyraNest-0.2.6-fnos-x86.fpk`，ARM64 使用 `LyraNest-0.2.6-fnos-arm.fpk`；标准版与兼容版二选一，不可同时安装。
 
 安装后，在应用设置中授权音乐目录并启动 LyraNest。默认使用飞牛统一网关访问：在你平时打开飞牛管理界面的局域网地址后追加 `/app/lyranest`。
 
@@ -174,10 +202,10 @@
 服务端镜像统一命名为：
 
 ```text
-ghcr.io/whwgogogo/lyranest-server:0.2.5
+ghcr.io/whwgogogo/lyranest-server:0.2.6
 ```
 
-生产环境请固定 `LYRANEST_VERSION=0.2.5`。同时发布 `0.2.5` 与 `latest` 标签，其中 `latest` 指向当前稳定版 `0.2.5`。
+生产环境请固定 `LYRANEST_VERSION=0.2.6`。同时发布 `0.2.6` 与 `latest` 标签，其中 `latest` 指向当前稳定版 `0.2.6`；同一个多架构标签会按设备自动选择 AMD64 或 ARM64 镜像。
 
 > 如果 Docker 报出 `proxyconnect tcp ... 127.0.0.1:27897: connect: connection refused`，请移除 Docker 守护进程中失效的 HTTP/HTTPS 代理后再拉取。若设备不能联网，可使用本次发行的 Docker 离线包并按下方命令导入和标记镜像。
 
@@ -188,7 +216,7 @@ ghcr.io/whwgogogo/lyranest-server:0.2.5
 ```yaml
 services:
   music-server:
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.5}
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.6}
     container_name: lyranest-server
     restart: unless-stopped
     mem_limit: 256m
@@ -205,7 +233,7 @@ services:
       GOGC: "100"
       MEDIA_EXTRACT_CONCURRENCY: "4"
       MEDIA_SCRAPE_CONCURRENCY: "2"
-      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.5 (+https://github.com/WHWgogogo/LyraNest)"
+      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.6 (+https://github.com/WHWgogogo/LyraNest)"
       MUSICBRAINZ_BASE_URL: "https://musicbrainz.org"
       MUSICBRAINZ_TIMEOUT: "20s"
       LOG_LEVEL: "info"
@@ -238,17 +266,25 @@ docker compose up -d
 
 ### 2. GHCR 无法访问时离线部署
 
-优先下载与设备架构匹配的 Docker 镜像归档：AMD64 使用 `LyraNest-0.2.5-docker-image-linux-amd64.tar.gz`，ARM64 使用 `LyraNest-0.2.5-docker-image-linux-arm64.tar.gz`。
+优先下载与设备架构匹配的 Docker 离线镜像归档：AMD64 使用 `LyraNest-0.2.6-docker-linux-amd64.tar.gz`，ARM64 使用 `LyraNest-0.2.6-docker-linux-arm64.tar.gz`。两份归档均包含完整镜像，按设备架构选择其中一份即可。
 
 ```bash
-docker load -i LyraNest-0.2.5-docker-image-linux-amd64.tar.gz
-docker tag lyranest-server:0.2.5-amd64 ghcr.io/whwgogogo/lyranest-server:0.2.5
+docker load -i LyraNest-0.2.6-docker-linux-amd64.tar.gz
+docker tag lyranest-server:0.2.6 ghcr.io/whwgogogo/lyranest-server:0.2.6
 curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/docker-compose.yml
 mkdir -p music downloads data cache
 docker compose up -d --pull never
 ```
 
-镜像归档无需访问 GHCR；ARM64 设备将示例中的 `amd64` 改为 `arm64`。部署包 `LyraNest-0.2.5-docker-linux-amd64.tar.gz` / `LyraNest-0.2.5-docker-linux-arm64.tar.gz` 则包含预构建服务端、Dockerfile 与部署 Compose，适用于需要自行调整部署配置的场景。离线启动时不要执行 `docker compose pull`；如果 NAS 图形界面会强制拉取镜像，请关闭“启动前拉取镜像”选项。
+ARM64 设备使用下面的归档和本地标签：
+
+```bash
+docker load -i LyraNest-0.2.6-docker-linux-arm64.tar.gz
+docker tag lyranest-server:0.2.6-arm64 ghcr.io/whwgogogo/lyranest-server:0.2.6
+docker compose up -d --pull never
+```
+
+离线启动时不要执行 `docker compose pull`；如果 NAS 图形界面会强制拉取镜像，请关闭“启动前拉取镜像”选项。
 ### 3. 检查服务
 
 ```bash
@@ -263,13 +299,15 @@ curl http://127.0.0.1:8080/health
 - 每个版本都保留独立 GitHub Release 与附件，不会覆盖旧版本。
 - README 的下载入口使用 GitHub `releases/latest`，始终指向最新稳定发行。
 - GitHub Release 附件页会显示每个附件的 SHA-256 摘要，可直接用于校验下载文件完整性。
-- 详细更新内容请查看对应版本的 `CHANGELOG.md`。
+- 详细更新内容请查看对应版本的 `RELEASE_NOTES_zh-CN.txt`。
 
 ## 相关项目
 
 - [LyraNest Community](https://github.com/WHWgogogo/LyraNest-Community)：MIT 许可的开源基础版本。
 - [LyraNest Releases](https://github.com/WHWgogogo/LyraNest/releases/latest)：完整发行版的最新下载页。
 - [59799517/simple_sq_music_plus](https://github.com/59799517/simple_sq_music_plus)：SQ 音乐下载插件项目。
+- [LyraNest Xiaomi Bridge](https://github.com/WHWgogogo/LyraNest-Xiaomi-Bridge)：LyraNest 小爱音响桥接项目。
+- [Solara](https://github.com/akudamatata/Solara)：相关开源项目。
 
 
 ## Star History

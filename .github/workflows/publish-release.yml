@@ -22,6 +22,11 @@ jobs:
           set -euo pipefail
           VERSION="${GITHUB_REF_NAME#v}"
           SOURCE_DIR="releases/${VERSION}"
+          NOTES_FILE="${SOURCE_DIR}/CHANGELOG.md"
+          if [[ ! -f "${NOTES_FILE}" ]]; then
+            NOTES_FILE="${SOURCE_DIR}/RELEASE_NOTES_zh-CN.txt"
+          fi
+          test -f "${NOTES_FILE}"
           assets=(
             "${SOURCE_DIR}/LyraNest-${VERSION}-android-arm64.apk"
             "${SOURCE_DIR}/LyraNest-${VERSION}-windows-x64.zip"
@@ -34,8 +39,8 @@ jobs:
             "docker-compose.yml"
           )
           for optional_asset in \
-            "${SOURCE_DIR}/LyraNest-${VERSION}-tv-arm64-v8a.apk" \
-            "${SOURCE_DIR}/LyraNest-${VERSION}-tv-armeabi-v7a.apk"; do
+            "${SOURCE_DIR}/LyraNest-TV-${VERSION}-arm64-v8a.apk" \
+            "${SOURCE_DIR}/LyraNest-TV-${VERSION}-armeabi-v7a.apk"; do
             if [[ -f "${optional_asset}" ]]; then
               assets+=("${optional_asset}")
             fi
@@ -44,24 +49,64 @@ jobs:
             test -f "${asset}"
           done
           printf '%s\n' "${assets[@]}" > release-assets.txt
-          echo "VERSION=${VERSION}" >> "${GITHUB_ENV}"
+          printf 'VERSION=%s\n' "${VERSION}" >> "${GITHUB_ENV}"
+          printf 'NOTES_FILE=%s\n' "${NOTES_FILE}" >> "${GITHUB_ENV}"
 
-      - name: Create GitHub release
+      - name: Create draft GitHub release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
-          if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
-            echo "Release ${GITHUB_REF_NAME} already exists; refusing to overwrite it." >&2
+          if gh release view "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            is_draft="$(gh release view "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" --json isDraft --jq '.isDraft')"
+            if [[ "${is_draft}" != "true" ]]; then
+              echo "Published release ${GITHUB_REF_NAME} already exists; refusing to overwrite it." >&2
+              exit 1
+            fi
+            echo "Resuming existing draft ${GITHUB_REF_NAME}."
+          else
+            gh release create "${GITHUB_REF_NAME}" \
+              --repo "${GITHUB_REPOSITORY}" \
+              --verify-tag \
+              --draft \
+              --title "LyraNest v${VERSION}" \
+              --notes-file "${NOTES_FILE}"
+          fi
+
+      - name: Upload release assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          existing_assets="$(gh release view "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" --json assets --jq '.assets[].name' || true)"
+          while IFS= read -r asset; do
+            asset_name="$(basename "${asset}")"
+            if printf '%s\n' "${existing_assets}" | grep -Fxq "${asset_name}"; then
+              echo "Keeping existing draft asset ${asset_name}."
+              continue
+            fi
+            echo "Uploading ${asset_name}."
+            gh release upload "${GITHUB_REF_NAME}" "${asset}" --repo "${GITHUB_REPOSITORY}"
+          done < release-assets.txt
+
+      - name: Publish and verify GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="$(wc -l < release-assets.txt | tr -d ' ')"
+          actual="$(gh release view "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" --json assets --jq '.assets | length')"
+          if [[ "${actual}" != "${expected}" ]]; then
+            echo "Expected ${expected} release assets, found ${actual}." >&2
             exit 1
           fi
-          mapfile -t assets < release-assets.txt
-          gh release create "${GITHUB_REF_NAME}" "${assets[@]}" \
-            --verify-tag \
-            --latest \
-            --title "LyraNest v${VERSION}" \
-            --notes-file "releases/${VERSION}/CHANGELOG.md"
+          gh release edit "${GITHUB_REF_NAME}" \
+            --repo "${GITHUB_REPOSITORY}" \
+            --draft=false \
+            --latest
 
   container:
     runs-on: ubuntu-latest

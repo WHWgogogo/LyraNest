@@ -10,7 +10,7 @@ services:
       - "7814:7814"
 
   music-server:
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.5}
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.6}
     container_name: lyranest-server
     restart: unless-stopped
     depends_on:
@@ -30,7 +30,7 @@ services:
       GOGC: "100"
       MEDIA_EXTRACT_CONCURRENCY: "4"
       MEDIA_SCRAPE_CONCURRENCY: "2"
-      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.5 (+https://github.com/WHWgogogo/LyraNest)"
+      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.6 (+https://github.com/WHWgogogo/LyraNest)"
       MUSICBRAINZ_BASE_URL: "https://musicbrainz.org"
       MUSICBRAINZ_TIMEOUT: "20s"
       LOG_LEVEL: "info"
