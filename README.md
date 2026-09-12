@@ -26,13 +26,14 @@
 
 当前稳定版本：`0.2.7`
 
+
 交流 QQ 群：`700454910`
 
 ## 0.2.7 更新日志
 
 ### NAS 原生支持与安装
 
-- **新增原生 NAS 安装包**：本次提供 QNAP、Synology DSM 和绿联 NAS 的原生安装包，分别覆盖 x86/AMD64 与 ARM64 设备；下载时必须选择 NAS 系统和 CPU 架构都匹配的文件。
+- **新增原生 NAS 安装包**：本次提供 QNAP、Synology DSM、绿联 NAS 和铁威马 TOS 7 的原生安装包，分别覆盖 x86/AMD64 与 ARM64 设备；下载时必须选择 NAS 系统和 CPU 架构都匹配的文件。
 - **fnOS 安装向导**：标准版与 Compat 版均新增音乐、有声书目录挂载提醒和可选的自定义局域网端口设置，首次安装可跳过，后续在设置中补充。
 
 ### 曲库管理与有声书
@@ -174,6 +175,10 @@
 | `LyraNest-0.2.7-synology-arm64.spk` | Synology DSM ARM64 原生安装包 |
 | `LyraNest-0.2.7-ugnas-amd64.upk` | 绿联 NAS AMD64 原生安装包 |
 | `LyraNest-0.2.7-ugnas-arm64.upk` | 绿联 NAS ARM64 原生安装包 |
+| `LyraNest-0.2.7-terramaster-x86_64.deb` | 铁威马 TOS 7 x86_64 原生安装包 |
+| `LyraNest-0.2.7-terramaster-aarch64.deb` | 铁威马 TOS 7 ARM64 原生安装包 |
+| `lyranest_x86_64.deb` | 铁威马 TOS 7 应用中心官方规范包 (x86_64) |
+| `lyranest_aarch64.deb` | 铁威马 TOS 7 应用中心官方规范包 (aarch64) |
 | `LyraNest-TV-0.2.7-arm64-v8a.apk` | Android TV ARM64 客户端 |
 | `LyraNest-TV-0.2.7-armeabi-v7a.apk` | Android TV ARM32 客户端 |
 | `LyraNest-0.2.7-docker-linux-amd64.tar.gz` | Docker Linux AMD64 离线镜像归档（`docker load`） |
@@ -189,11 +194,12 @@
 
 ## 其他 NAS 原生安装包
 
-QNAP、Synology DSM 与绿联 NAS 用户可从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应的原生包，在各自系统的应用中心或套件中心选择手动安装。请先在 NAS 系统信息中确认 CPU 架构：x86/x86_64 或 AMD64 设备使用 `x86`/`amd64` 文件，ARM64 设备使用 `arm64` 文件；不同 NAS 系统的安装包不能交叉安装。
+QNAP、Synology DSM、绿联 NAS 与铁威马 TOS 7 用户可从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应的原生包，在各自系统的应用中心或套件中心选择手动安装。请先在 NAS 系统信息中确认 CPU 架构：x86/x86_64 或 AMD64 设备使用 `x86`/`amd64` 文件，ARM64 设备使用 `arm64`/`aarch64` 文件；不同 NAS 系统的安装包不能交叉安装。
 
 - QNAP：`LyraNest-0.2.7-qnap-x86.qpkg` 或 `LyraNest-0.2.7-qnap-arm64.qpkg`。
 - Synology DSM：`LyraNest-0.2.7-synology-x86.spk` 或 `LyraNest-0.2.7-synology-arm64.spk`。
 - 绿联 NAS：`LyraNest-0.2.7-ugnas-amd64.upk` 或 `LyraNest-0.2.7-ugnas-arm64.upk`。
+- 铁威马 TOS 7：`LyraNest-0.2.7-terramaster-x86_64.deb` 或 `LyraNest-0.2.7-terramaster-aarch64.deb`（亦提供应用中心规范包 `lyranest_x86_64.deb` 与 `lyranest_aarch64.deb`）。
 
 ## Docker 镜像
 
