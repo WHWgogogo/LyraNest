@@ -305,14 +305,14 @@ curl http://127.0.0.1:8080/health
 - GitHub Release 附件页会显示每个附件的 SHA-256 摘要，可直接用于校验下载文件完整性。
 - 详细更新内容请查看对应版本的 `CHANGELOG.md`。
 
-## 相关项目
+## 项目友链
 
 - [LyraNest Community](https://github.com/WHWgogogo/LyraNest-Community)：MIT 许可的开源基础版本。
 - [LyraNest Releases](https://github.com/WHWgogogo/LyraNest/releases/latest)：完整发行版的最新下载页。
-- [59799517/simple_sq_music_plus](https://github.com/59799517/simple_sq_music_plus)：SQ 音乐下载插件项目。
+- [simple_sq_music_plus](https://github.com/59799517/simple_sq_music_plus)：SQ 音乐下载插件项目。
 - [LyraNest Xiaomi Bridge](https://github.com/WHWgogogo/LyraNest-Xiaomi-Bridge)：LyraNest 小爱音响桥接项目。
-- [Solara](https://github.com/akudamatata/Solara)：相关开源项目。
-
+- [Solara](https://github.com/akudamatata/Solara)：Solara音乐下载插件项目。
+- [GoMusic](https://github.com/Bistutu/GoMusic)：GoMusic歌单导入项目。
 
 ## Star History
 
