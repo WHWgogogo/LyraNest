@@ -14,7 +14,7 @@
 
 <p align="center">
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest">下载最新版</a> ·
-  <a href="https://lyranest.dpdns.org/">官网</a> ·
+  <a href="https://lyranest.cc.cd/">官网</a> ·
   <a href="#docker-compose-部署">Docker 部署</a> ·
   <a href="releases/0.2.7/CHANGELOG.md">更新日志</a> ·
   <a href="https://github.com/WHWgogogo/LyraNest-Community">开源社区版</a>
