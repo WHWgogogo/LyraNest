@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest"><img src="https://img.shields.io/github/v/release/WHWgogogo/LyraNest?display_name=tag&label=Release" alt="Latest Release" /></a>
-  <a href="https://github.com/WHWgogogo/LyraNest/releases/latest"><img src="https://img.shields.io/badge/Platform-Android%20%7C%20Windows-4f46e5" alt="Platforms" /></a>
+  <a href="https://github.com/WHWgogogo/LyraNest/releases/latest"><img src="https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20HarmonyOS%20%7C%20Windows%20%7C%20macOS%20%7C%20TV-4f46e5" alt="Platforms" /></a>
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest/download/docker-compose.yml"><img src="https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white" alt="Docker Compose" /></a>
 </p>
 
@@ -16,40 +16,48 @@
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest">下载最新版</a> ·
   <a href="https://lyranest.cc.cd/">官网</a> ·
   <a href="#docker-compose-部署">Docker 部署</a> ·
-  <a href="releases/0.2.7/CHANGELOG.md">更新日志</a> ·
+  <a href="releases/0.2.8/CHANGELOG.md">更新日志</a> ·
   <a href="https://github.com/WHWgogogo/LyraNest-Community">开源社区版</a>
 </p>
 
 > **发行版说明**：此仓库用于发布 LyraNest 的客户端安装包、Docker 部署配置与更新记录，不包含完整版本源代码。若需要开源、可自行构建的基础版本，请前往 [LyraNest Community](https://github.com/WHWgogogo/LyraNest-Community)。
 
-将音乐文件保存在自己的服务器、NAS 或电脑中，即可通过 Web、Windows 和 Android 客户端管理、播放并同步个人音乐库。
+将音乐文件保存在自己的服务器、NAS 或电脑中，即可通过 Web、Windows、macOS、iOS、Android 和 Android TV 客户端管理、播放并同步个人音乐库。
 
-当前稳定版本：`0.2.7`
+当前稳定版本：`0.2.8`
 
 
 交流 QQ 群：`700454910`
 
-## 0.2.7 更新日志
+## 0.2.8 更新日志
 
-### NAS 原生支持与安装
+### 投播生态与多设备音频输出
 
-- **新增原生 NAS 安装包**：本次提供 QNAP、Synology DSM、绿联 NAS 和铁威马 TOS 7 的原生安装包，分别覆盖 x86/AMD64 与 ARM64 设备；下载时必须选择 NAS 系统和 CPU 架构都匹配的文件。
-- **fnOS 安装向导**：标准版与 Compat 版均新增音乐、有声书目录挂载提醒和可选的自定义局域网端口设置，首次安装可跳过，后续在设置中补充。
+- **全新 AirPlay 2 桥接支持**：支持将曲库音频无线投送至苹果 HomePod、Apple TV 及第三方 AirPlay 兼容音箱，支持全端独立音量与播控调节。
+- **全新本机 3.5mm / ALSA 声卡直出**：专为 NAS 与主机硬件打造，通过 ALSA / MPD 直通 NAS 本地 3.5mm 耳机孔或 USB DAC 外置声卡，无损原音输出，内存占用仅 13MB。
+- **全端聚合投送中心**：统一聚合 AirPlay 2、本地声卡、DLNA 及小爱音箱四大通道，支持设备状态实时探测、进度条拖拽同步（Seek Offset）与音量滑块调节。
+- **小爱音箱桥接器升级至 v1.1.6**：新增多音箱会话隔离与多账号用户设备绑定，支持有声书语音点播与双向断点续播，引入虚拟播放时钟解决休眠状态回传延迟与断流问题。
 
-### 曲库管理与有声书
+### 连接架构与免配扫码登录
 
-- **一键曲库去重与清理**：可按音频规格、时长、添加时间等四种策略保留曲目，批量隐藏重复歌曲；管理员可在确认目录写入权限后清理隐藏文件。
-- **播放与封面优化**：播放收藏仅加入收藏曲目；未内嵌封面、未刮削的歌曲可自动使用同目录封面。
-- **有声书书架重构**：优化封面、进度、演播者和章节展示，并改进大屏和移动端全屏播放体验。
+- **X25519 局域网端到端加密扫码登录**：手机 App 扫描 Web 端或 TV 端二维码即可秒级完成安全配对与跨端鉴权，彻底告别手动输入 IP、端口与密码。
+- **飞牛 FNID 穿透与跨网自适应**：重构 FNID 多端点竞速优选与双签名鉴权算法，大幅提升无公网 IP 环境下的跨网穿透连通率与冷启动速度；隔离同 IP 多端口的会话冲突。
 
-### Web、客户端与 TV
+### 无损格式与网络串流
 
-- **PWA 与锁屏控制**：Web 支持添加到 iOS、HarmonyOS 桌面；MediaSession 可显示歌曲信息与封面，并支持锁屏暂停、切歌。
-- **移动端适配**：修复兼容模式报告在小屏上的横向溢出和播放页触摸穿透问题。
-- **客户端连接**：新增 fnid 外网地址支持；修复收藏页播放和定时结束播放问题。
-- **TV 与小爱桥接**：TV 首页和播放页体验优化，新增转码与标签功能；小爱桥接器支持自定义语音口令以及控制曲库、歌单播放。
+- **原生支持 STRM 网络流媒体文件**：音乐与有声书全面支持 `.strm` 文件识别与入库，支持 302 重定向、反代播放与动态按需转码；有声书 STRM 章节支持跨端拖拽寻道与进度断点记忆。
+- **CUE 虚拟分轨与切片串流**：整轨音频配合同名 `.cue` 索引文件自动虚拟分轨入库，服务端支持任意时间偏移切片 Seeking，实现精准秒开。
+- **扩充高清无损解码**：新增 DSF、DFF（DSD 母带级音频）、WavPack、CAF 与 AIFF-C 高清无损音频解码嗅探与元数据提取，集成 APE 专用头部解析器。
 
-完整更新记录请查看 [`releases/0.2.7/CHANGELOG.md`](releases/0.2.7/CHANGELOG.md)。
+### 曲库治理、有声书与全端体验
+
+- **隐藏歌曲独立管理页**：集中查看被去重或手动隐藏的全部曲目，支持单曲恢复与批量一键移出隐藏名单；TV 端深度适配遥控器方向键快捷操作。
+- **挂载目录失效容错**：磁盘离线或物理路径变更时自动标记失效状态，并允许直接在管理面板中安全解挂与删除。
+- **智能刮削算法 V2**：引入证据门控与冲突抑制模型，大幅降低误刮削；强化基于目录层级与 URL 的路径元数据推断机制（PathMeta）。
+- **有声书系统深化**：支持全网有声书搜索并直接下载导入专属私有书架，全屏播放器增加专属书籍标签与章节树，支持整本书籍加入跨端投送队列。
+- **全平台客户端原生齐备**：移动端新增悬浮毛玻璃胶囊导航栏与旋转黑胶 Disc 迷你播放器；正式推出 macOS 原生客户端（DMG / ZIP）与 iOS 原生客户端（IPA）；Android TV 端全面对齐 STRM 串流与免配扫码登录；全 NAS 体系官方包覆盖飞牛、群晖、铁威马、威联通、绿联、畅网。
+
+完整更新记录请查看 [`releases/0.2.8/CHANGELOG.md`](releases/0.2.8/CHANGELOG.md)。
 
 ## 功能简介
 
@@ -159,57 +167,71 @@
 
 ## 获取客户端与服务端
 
-请前往 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应平台的文件。该链接会在新版本发布后自动指向最新稳定版：
+> [!IMPORTANT]
+> **测试版客户端与签名说明**：
+> 目前 **iOS (`.ipa`)**、**macOS (`.dmg` / `.zip`)** 与 **鸿蒙 HarmonyOS (`.hap`)** 版本处于测试公测阶段，安装包均为**无开发者签名版本**，需要用户自行签名或侧载安装：
+> - **iOS 端**：需使用个人开发者证书或第三方侧载工具（如 AltStore、SideStore、牛蛙助手、爱思助手等）签名后安装。
+> - **macOS 端**：通用架构安装包初次打开若提示“无法验证开发者”或“已损坏”，请在 macOS「系统设置」→「隐私与安全性」中选择「仍要打开」，或在终端执行 `sudo xattr -rd com.apple.quarantine /Applications/LyraNest.app` 解除 Gatekeeper 隔离。
+> - **鸿蒙 HarmonyOS 端**：需在系统设置中开启「开发者选项」，使用 DevEco Studio 或鸿蒙命令行工具侧载签名安装。
 
 | 文件 | 说明 |
 | --- | --- |
-| `LyraNest-0.2.7-android-arm64.apk` | Android 手机、平板客户端 |
-| `LyraNest-0.2.7-windows-x64.zip` | Windows 桌面客户端 |
-| `LyraNest-0.2.7-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
-| `LyraNest-0.2.7-fnos-arm.fpk` | 飞牛 fnOS ARM 原生安装包 |
-| `LyraNest-Compat-0.2.7-fnos-x86.fpk` | fnOS x86 兼容版（不依赖统一网关） |
-| `LyraNest-Compat-0.2.7-fnos-arm.fpk` | fnOS ARM 兼容版（不依赖统一网关） |
-| `LyraNest-0.2.7-qnap-x86.qpkg` | QNAP x86_64 原生安装包 |
-| `LyraNest-0.2.7-qnap-arm64.qpkg` | QNAP ARM64 原生安装包 |
-| `LyraNest-0.2.7-synology-x86.spk` | Synology DSM x86_64 原生安装包 |
-| `LyraNest-0.2.7-synology-arm64.spk` | Synology DSM ARM64 原生安装包 |
-| `LyraNest-0.2.7-ugnas-amd64.upk` | 绿联 NAS AMD64 原生安装包 |
-| `LyraNest-0.2.7-ugnas-arm64.upk` | 绿联 NAS ARM64 原生安装包 |
-| `LyraNest-0.2.7-terramaster-x86_64.deb` | 铁威马 TOS 7 x86_64 原生安装包 |
-| `LyraNest-0.2.7-terramaster-aarch64.deb` | 铁威马 TOS 7 ARM64 原生安装包 |
-| `lyranest_x86_64.deb` | 铁威马 TOS 7 应用中心官方规范包 (x86_64) |
-| `lyranest_aarch64.deb` | 铁威马 TOS 7 应用中心官方规范包 (aarch64) |
-| `LyraNest-TV-0.2.7-arm64-v8a.apk` | Android TV ARM64 客户端 |
-| `LyraNest-TV-0.2.7-armeabi-v7a.apk` | Android TV ARM32 客户端 |
-| `LyraNest-0.2.7-docker-linux-amd64.tar.gz` | Docker Linux AMD64 离线镜像归档（`docker load`） |
-| `LyraNest-0.2.7-docker-linux-arm64.tar.gz` | Docker Linux ARM64 离线镜像归档（`docker load`） |
+| `LyraNest-0.2.8-android-arm64.apk` | Android 手机、平板客户端 |
+| `LyraNest-0.2.8-ios-arm64.ipa` | iOS 移动客户端（测试阶段，无签名，需自行签名侧载安装） |
+| `LyraNest-0.2.8-harmony.hap` | 华为鸿蒙 HarmonyOS 原生客户端（测试阶段，无签名，需开发者模式安装） |
+| `LyraNest-0.2.8-windows-x64.zip` | Windows 桌面客户端 |
+| `LyraNest-Server-0.2.8-windows-x64.zip` | Windows 服务端独立运行包 |
+| `LyraNest-0.2.8-macos-universal.dmg` | macOS 桌面客户端（通用架构 DMG，测试阶段，无签名，需允许安全偏好） |
+| `LyraNest-0.2.8-macos-universal.zip` | macOS 桌面客户端（通用架构免安装 ZIP 归档，测试阶段，无签名） |
+| `LyraNest-TV-0.2.8-arm64-v8a.apk` | Android TV ARM64 客户端 |
+| `LyraNest-TV-0.2.8-armeabi-v7a.apk` | Android TV ARM32 客户端 |
+| `LyraNest-0.2.8-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
+| `LyraNest-0.2.8-fnos-arm.fpk` | 飞牛 fnOS ARM 原生安装包 |
+| `LyraNest-Compat-0.2.8-fnos-x86.fpk` | fnOS x86 兼容版（不依赖统一网关） |
+| `LyraNest-Compat-0.2.8-fnos-arm.fpk` | fnOS ARM 兼容版（不依赖统一网关） |
+| `LyraNest-0.2.8-synology-x86_64.spk` | Synology DSM x86_64 原生安装包 |
+| `LyraNest-0.2.8-synology-armv8.spk` | Synology DSM ARM64 原生安装包 |
+| `LyraNest-0.2.8-terramaster-x86_64.deb` | 铁威马 TOS 7 x86_64 原生安装包 |
+| `LyraNest-0.2.8-terramaster-aarch64.deb` | 铁威马 TOS 7 ARM64 原生安装包 |
+| `LyraNest-0.2.8-qnap-x86_64.qpkg` | QNAP x86_64 原生安装包 |
+| `LyraNest-0.2.8-qnap-arm_64.qpkg` | QNAP ARM64 原生安装包 |
+| `LyraNest-0.2.8-ugnas-amd64.upk` | 绿联 NAS AMD64 原生安装包 |
+| `LyraNest-0.2.8-ugnas-arm64.upk` | 绿联 NAS ARM64 原生安装包 |
+| `LyraNest-0.2.8-cwnas.cpk` | 畅网 NAS (CWNAS / AINAS) 原生应用包 |
+| `LyraNest-0.2.8-docker-linux-amd64.tar.gz` | Docker Linux AMD64 离线镜像归档（`docker load`） |
+| `LyraNest-0.2.8-docker-linux-arm64.tar.gz` | Docker Linux ARM64 离线镜像归档（`docker load`） |
 | `docker-compose.yml` | Docker Compose 在线部署配置 |
+
 ## 飞牛 fnOS 原生 FPK 安装（推荐）
 
-飞牛 NAS 用户请从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应架构的 FPK：x86_64 使用 `LyraNest-0.2.7-fnos-x86.fpk`，ARM64 使用 `LyraNest-0.2.7-fnos-arm.fpk`；标准版与兼容版二选一，不可同时安装。
+飞牛 NAS 用户请从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应架构的 FPK：x86_64 使用 `LyraNest-0.2.8-fnos-x86.fpk`，ARM64 使用 `LyraNest-0.2.8-fnos-arm.fpk`；标准版与兼容版二选一，不可同时安装。
 
 安装后，在应用设置中授权音乐目录并启动 LyraNest。默认使用飞牛统一网关访问：在你平时打开飞牛管理界面的局域网地址后追加 `/app/lyranest`。
 
 如需独立局域网端口，可在 LyraNest 应用设置填写 `1024–65535` 的自定义端口，保存后重启应用，再通过 `http://<飞牛局域网地址>:<端口>/` 访问。留空则只保留飞牛网关入口；独立端口仅建议用于可信局域网，不要配置公网端口映射。
 
+## 畅网 NAS (CWNAS / AINAS) 原生 CPK 安装
+
+畅网 NAS 用户可下载 `LyraNest-0.2.8-cwnas.cpk`。在畅网 NAS 系统应用管理器中点击“手动安装 / 本地安装”，选择下载的 `.cpk` 文件即可一键部署并注册后台服务与入口图标。
+
 ## 其他 NAS 原生安装包
 
-QNAP、Synology DSM、绿联 NAS 与铁威马 TOS 7 用户可从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应的原生包，在各自系统的应用中心或套件中心选择手动安装。请先在 NAS 系统信息中确认 CPU 架构：x86/x86_64 或 AMD64 设备使用 `x86`/`amd64` 文件，ARM64 设备使用 `arm64`/`aarch64` 文件；不同 NAS 系统的安装包不能交叉安装。
+QNAP、Synology DSM、绿联 NAS 与铁威马 TOS 7 用户可从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应的原生包，在各自系统的应用中心或套件中心选择手动安装。请先在 NAS 系统信息中确认 CPU 架构：x86/x86_64 或 AMD64 设备使用 `x86_64`/`amd64` 文件，ARM64 设备使用 `arm_64`/`armv8`/`aarch64` 文件；不同 NAS 系统的安装包不能交叉安装。
 
-- QNAP：`LyraNest-0.2.7-qnap-x86.qpkg` 或 `LyraNest-0.2.7-qnap-arm64.qpkg`。
-- Synology DSM：`LyraNest-0.2.7-synology-x86.spk` 或 `LyraNest-0.2.7-synology-arm64.spk`。
-- 绿联 NAS：`LyraNest-0.2.7-ugnas-amd64.upk` 或 `LyraNest-0.2.7-ugnas-arm64.upk`。
-- 铁威马 TOS 7：`LyraNest-0.2.7-terramaster-x86_64.deb` 或 `LyraNest-0.2.7-terramaster-aarch64.deb`（亦提供应用中心规范包 `lyranest_x86_64.deb` 与 `lyranest_aarch64.deb`）。
+- QNAP：`LyraNest-0.2.8-qnap-x86_64.qpkg` 或 `LyraNest-0.2.8-qnap-arm_64.qpkg`。
+- Synology DSM：`LyraNest-0.2.8-synology-x86_64.spk` 或 `LyraNest-0.2.8-synology-armv8.spk`。
+- 绿联 NAS：`LyraNest-0.2.8-ugnas-amd64.upk` 或 `LyraNest-0.2.8-ugnas-arm64.upk`。
+- 铁威马 TOS 7：`LyraNest-0.2.8-terramaster-x86_64.deb` 或 `LyraNest-0.2.8-terramaster-aarch64.deb`。
 
 ## Docker 镜像
 
 服务端镜像统一命名为：
 
 ```text
-ghcr.io/whwgogogo/lyranest-server:0.2.7
+ghcr.io/whwgogogo/lyranest-server:0.2.8
 ```
 
-生产环境请固定 `LYRANEST_VERSION=0.2.7`。同时发布 `0.2.7` 与 `latest` 标签，其中 `latest` 指向当前稳定版 `0.2.7`；同一个多架构标签会按设备自动选择 AMD64 或 ARM64 镜像。
+生产环境请固定 `LYRANEST_VERSION=0.2.8`。同时发布 `0.2.8` 与 `latest` 标签，其中 `latest` 指向当前稳定版 `0.2.8`；同一个多架构标签会按设备自动选择 AMD64 或 ARM64 镜像。
 
 > 如果 Docker 报出 `proxyconnect tcp ... 127.0.0.1:27897: connect: connection refused`，请移除 Docker 守护进程中失效的 HTTP/HTTPS 代理后再拉取。若设备不能联网，可使用本次发行的 Docker 离线包并按下方命令导入和标记镜像。
 
@@ -220,7 +242,7 @@ ghcr.io/whwgogogo/lyranest-server:0.2.7
 ```yaml
 services:
   music-server:
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.7}
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.8}
     container_name: lyranest-server
     restart: unless-stopped
     mem_limit: 256m
@@ -237,7 +259,7 @@ services:
       GOGC: "100"
       MEDIA_EXTRACT_CONCURRENCY: "4"
       MEDIA_SCRAPE_CONCURRENCY: "2"
-      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.7 (+https://github.com/WHWgogogo/LyraNest)"
+      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.8 (+https://github.com/WHWgogogo/LyraNest)"
       MUSICBRAINZ_BASE_URL: "https://musicbrainz.org"
       MUSICBRAINZ_TIMEOUT: "20s"
       LOG_LEVEL: "info"
@@ -270,11 +292,11 @@ docker compose up -d
 
 ### 2. GHCR 无法访问时离线部署
 
-优先下载与设备架构匹配的 Docker 离线镜像归档：AMD64 使用 `LyraNest-0.2.7-docker-linux-amd64.tar.gz`，ARM64 使用 `LyraNest-0.2.7-docker-linux-arm64.tar.gz`。两份归档均包含完整镜像，按设备架构选择其中一份即可。
+优先下载与设备架构匹配的 Docker 离线镜像归档：AMD64 使用 `LyraNest-0.2.8-docker-linux-amd64.tar.gz`，ARM64 使用 `LyraNest-0.2.8-docker-linux-arm64.tar.gz`。两份归档均包含完整镜像，按设备架构选择其中一份即可。
 
 ```bash
-docker load -i LyraNest-0.2.7-docker-linux-amd64.tar.gz
-docker tag lyranest-server:0.2.7 ghcr.io/whwgogogo/lyranest-server:0.2.7
+docker load -i LyraNest-0.2.8-docker-linux-amd64.tar.gz
+docker tag lyranest-server:0.2.8 ghcr.io/whwgogogo/lyranest-server:0.2.8
 curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/docker-compose.yml
 mkdir -p music downloads data cache
 docker compose up -d --pull never
@@ -283,8 +305,8 @@ docker compose up -d --pull never
 ARM64 设备使用下面的归档和本地标签：
 
 ```bash
-docker load -i LyraNest-0.2.7-docker-linux-arm64.tar.gz
-docker tag lyranest-server:0.2.7-arm64 ghcr.io/whwgogogo/lyranest-server:0.2.7
+docker load -i LyraNest-0.2.8-docker-linux-arm64.tar.gz
+docker tag lyranest-server:0.2.8-arm64 ghcr.io/whwgogogo/lyranest-server:0.2.8
 docker compose up -d --pull never
 ```
 
