@@ -36,7 +36,7 @@
 - **全新 AirPlay 2 桥接支持**：推出官方独立插件 [LyraNest AirPlay Bridge](https://github.com/WHWgogogo/LyraNest-AirPlay-Bridge)，支持将曲库音频无线投送至苹果 HomePod、Apple TV 及第三方 AirPlay 兼容音箱，支持全端独立音量与播控调节。
 - **全新本机 3.5mm / ALSA 声卡直出**：推出官方独立插件 [LyraNest Local Output](https://github.com/WHWgogogo/LyraNest-Local-Output)，专为 NAS 与主机硬件打造，通过 ALSA / MPD 直通 NAS 本地 3.5mm 耳机孔或 USB DAC 外置声卡，无损原音输出，内存占用仅 13MB。
 - **全端聚合投送中心**：统一聚合 AirPlay 2、本地声卡、DLNA 及小爱音箱四大通道，支持设备状态实时探测、进度条拖拽同步（Seek Offset）与音量滑块调节。
-- **小爱音箱桥接器升级至 v1.1.6**：官方插件 [LyraNest Xiaomi Bridge](https://github.com/WHWgogogo/LyraNest-Xiaomi-Bridge) 全面升级，新增多音箱会话隔离与多账号用户设备绑定，支持有声书语音点播与双向断点续播，引入虚拟播放时钟解决休眠状态回传延迟与断流问题。
+- **小爱音箱桥接器升级至 v1.1.6**：官方插件 [LyraNest Xiaoai Bridge](https://github.com/WHWgogogo/LyraNest-Xiaoai-Bridge) 全面升级，新增多音箱会话隔离与多账号用户设备绑定，支持有声书语音点播与双向断点续播，引入虚拟播放时钟解决休眠状态回传延迟与断流问题。
 
 ### 连接架构与免配扫码登录
 
@@ -333,7 +333,7 @@ LyraNest 提供模块化的外部音频输出与设备桥接插件，均已独�
 
 - [LyraNest AirPlay Bridge](https://github.com/WHWgogogo/LyraNest-AirPlay-Bridge)：AirPlay 2 无线音频桥接服务，支持将曲库音频投送至苹果 HomePod、Apple TV 及第三方 AirPlay 兼容音箱，支持全端独立音量与多房间同步。
 - [LyraNest Local Output](https://github.com/WHWgogogo/LyraNest-Local-Output)：NAS 本机 3.5mm 耳机孔与 USB DAC 外置声卡直出服务，极低内存占用（约 13MB），提供母带级无损直通输出。
-- [LyraNest Xiaomi Bridge](https://github.com/WHWgogogo/LyraNest-Xiaomi-Bridge)：小爱音箱语音联动与投送桥接服务，支持多音箱隔离、语音点播曲库/歌单与断点续播。
+- [LyraNest Xiaoai Bridge](https://github.com/WHWgogogo/LyraNest-Xiaoai-Bridge)：小爱音箱语音联动与投送桥接服务，支持多音箱隔离、语音点播曲库/歌单与断点续播。
 
 ## 项目友链
 
