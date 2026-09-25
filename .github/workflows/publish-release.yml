@@ -4,12 +4,53 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (without v)'
+        required: true
+        default: '0.2.8'
 
 permissions:
   contents: write
   packages: write
 
 jobs:
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve version
+        id: version
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "value=${{ github.event.inputs.version }}" >> "${GITHUB_OUTPUT}"
+          else
+            echo "value=${GITHUB_REF_NAME#v}" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.release
+          platforms: linux/amd64,linux/arm64
+          push: true
+          build-args: |
+            VERSION=${{ steps.version.outputs.value }}
+          tags: |
+            ghcr.io/whwgogogo/lyranest-server:${{ steps.version.outputs.value }}
+            ghcr.io/whwgogogo/lyranest-server:latest
+
   release:
     needs: container
     runs-on: ubuntu-latest
@@ -20,7 +61,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          VERSION="${GITHUB_REF_NAME#v}"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION="${GITHUB_REF_NAME#v}"
+          fi
           SOURCE_DIR="releases/${VERSION}"
           NOTES_FILE="${SOURCE_DIR}/CHANGELOG.md"
           if [[ ! -f "${NOTES_FILE}" ]]; then
@@ -56,37 +101,42 @@ jobs:
           done
           printf '%s\n' "${assets[@]}" > release-assets.txt
           printf 'VERSION=%s\n' "${VERSION}" >> "${GITHUB_ENV}"
+          printf 'TAG_NAME=v%s\n' "${VERSION}" >> "${GITHUB_ENV}"
           printf 'NOTES_FILE=%s\n' "${NOTES_FILE}" >> "${GITHUB_ENV}"
 
-      - name: Create draft GitHub release
+      - name: Create or update GitHub release
+        id: create_release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
-          if gh release view "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
-            is_draft="$(gh release view "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" --json isDraft --jq '.isDraft')"
+          if gh release view "${TAG_NAME}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            is_draft="$(gh release view "${TAG_NAME}" --repo "${GITHUB_REPOSITORY}" --json isDraft --jq '.isDraft')"
             if [[ "${is_draft}" != "true" ]]; then
-              echo "Published release ${GITHUB_REF_NAME} already exists; refusing to overwrite it." >&2
-              exit 1
+              echo "Published release ${TAG_NAME} already exists."
+              echo "skip_upload=true" >> "$GITHUB_OUTPUT"
+              exit 0
             fi
-            echo "Resuming existing draft ${GITHUB_REF_NAME}."
+            echo "Resuming existing draft ${TAG_NAME}."
           else
-            gh release create "${GITHUB_REF_NAME}" \
+            gh release create "${TAG_NAME}" \
               --repo "${GITHUB_REPOSITORY}" \
               --verify-tag \
               --draft \
               --title "LyraNest v${VERSION}" \
               --notes-file "${NOTES_FILE}"
           fi
+          echo "skip_upload=false" >> "$GITHUB_OUTPUT"
 
       - name: Upload release assets
+        if: steps.create_release.outputs.skip_upload != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
-          existing_assets="$(gh release view "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" --json assets --jq '.assets[].name' || true)"
+          existing_assets="$(gh release view "${TAG_NAME}" --repo "${GITHUB_REPOSITORY}" --json assets --jq '.assets[].name' || true)"
           while IFS= read -r asset; do
             asset_name="$(basename "${asset}")"
             if printf '%s\n' "${existing_assets}" | grep -Fxq "${asset_name}"; then
@@ -94,52 +144,24 @@ jobs:
               continue
             fi
             echo "Uploading ${asset_name}."
-            gh release upload "${GITHUB_REF_NAME}" "${asset}" --repo "${GITHUB_REPOSITORY}"
+            gh release upload "${TAG_NAME}" "${asset}" --repo "${GITHUB_REPOSITORY}"
           done < release-assets.txt
 
       - name: Publish and verify GitHub release
+        if: steps.create_release.outputs.skip_upload != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
           expected="$(wc -l < release-assets.txt | tr -d ' ')"
-          actual="$(gh release view "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" --json assets --jq '.assets | length')"
+          actual="$(gh release view "${TAG_NAME}" --repo "${GITHUB_REPOSITORY}" --json assets --jq '.assets | length')"
           if [[ "${actual}" != "${expected}" ]]; then
             echo "Expected ${expected} release assets, found ${actual}." >&2
             exit 1
           fi
-          gh release edit "${GITHUB_REF_NAME}" \
+          gh release edit "${TAG_NAME}" \
             --repo "${GITHUB_REPOSITORY}" \
             --draft=false \
             --latest
 
-  container:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Resolve version
-        id: version
-        shell: bash
-        run: echo "value=${GITHUB_REF_NAME#v}" >> "${GITHUB_OUTPUT}"
-
-      - uses: docker/setup-buildx-action@v3
-
-      - uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: Dockerfile.release
-          platforms: linux/amd64,linux/arm64
-          push: true
-          build-args: |
-            VERSION=${{ steps.version.outputs.value }}
-          tags: |
-            ghcr.io/whwgogogo/lyranest-server:${{ steps.version.outputs.value }}
-            ghcr.io/whwgogogo/lyranest-server:latest
