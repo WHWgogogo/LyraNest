@@ -33,10 +33,10 @@
 
 ### 投播生态与多设备音频输出
 
-- **全新 AirPlay 2 桥接支持**：支持将曲库音频无线投送至苹果 HomePod、Apple TV 及第三方 AirPlay 兼容音箱，支持全端独立音量与播控调节。
-- **全新本机 3.5mm / ALSA 声卡直出**：专为 NAS 与主机硬件打造，通过 ALSA / MPD 直通 NAS 本地 3.5mm 耳机孔或 USB DAC 外置声卡，无损原音输出，内存占用仅 13MB。
+- **全新 AirPlay 2 桥接支持**：推出官方独立插件 [LyraNest AirPlay Bridge](https://github.com/WHWgogogo/LyraNest-AirPlay-Bridge)，支持将曲库音频无线投送至苹果 HomePod、Apple TV 及第三方 AirPlay 兼容音箱，支持全端独立音量与播控调节。
+- **全新本机 3.5mm / ALSA 声卡直出**：推出官方独立插件 [LyraNest Local Output](https://github.com/WHWgogogo/LyraNest-Local-Output)，专为 NAS 与主机硬件打造，通过 ALSA / MPD 直通 NAS 本地 3.5mm 耳机孔或 USB DAC 外置声卡，无损原音输出，内存占用仅 13MB。
 - **全端聚合投送中心**：统一聚合 AirPlay 2、本地声卡、DLNA 及小爱音箱四大通道，支持设备状态实时探测、进度条拖拽同步（Seek Offset）与音量滑块调节。
-- **小爱音箱桥接器升级至 v1.1.6**：新增多音箱会话隔离与多账号用户设备绑定，支持有声书语音点播与双向断点续播，引入虚拟播放时钟解决休眠状态回传延迟与断流问题。
+- **小爱音箱桥接器升级至 v1.1.6**：官方插件 [LyraNest Xiaomi Bridge](https://github.com/WHWgogogo/LyraNest-Xiaomi-Bridge) 全面升级，新增多音箱会话隔离与多账号用户设备绑定，支持有声书语音点播与双向断点续播，引入虚拟播放时钟解决休眠状态回传延迟与断流问题。
 
 ### 连接架构与免配扫码登录
 
@@ -327,14 +327,21 @@ curl http://127.0.0.1:8080/health
 - GitHub Release 附件页会显示每个附件的 SHA-256 摘要，可直接用于校验下载文件完整性。
 - 详细更新内容请查看对应版本的 `CHANGELOG.md`。
 
+## 官方插件与扩展生态
+ 
+LyraNest 提供模块化的外部音频输出与设备桥接插件，均已独立开源发布并支持 Docker Compose 与全 NAS 原生部署：
+
+- [LyraNest AirPlay Bridge](https://github.com/WHWgogogo/LyraNest-AirPlay-Bridge)：AirPlay 2 无线音频桥接服务，支持将曲库音频投送至苹果 HomePod、Apple TV 及第三方 AirPlay 兼容音箱，支持全端独立音量与多房间同步。
+- [LyraNest Local Output](https://github.com/WHWgogogo/LyraNest-Local-Output)：NAS 本机 3.5mm 耳机孔与 USB DAC 外置声卡直出服务，极低内存占用（约 13MB），提供母带级无损直通输出。
+- [LyraNest Xiaomi Bridge](https://github.com/WHWgogogo/LyraNest-Xiaomi-Bridge)：小爱音箱语音联动与投送桥接服务，支持多音箱隔离、语音点播曲库/歌单与断点续播。
+
 ## 项目友链
 
 - [LyraNest Community](https://github.com/WHWgogogo/LyraNest-Community)：MIT 许可的开源基础版本。
 - [LyraNest Releases](https://github.com/WHWgogogo/LyraNest/releases/latest)：完整发行版的最新下载页。
 - [simple_sq_music_plus](https://github.com/59799517/simple_sq_music_plus)：SQ 音乐下载插件项目。
-- [LyraNest Xiaomi Bridge](https://github.com/WHWgogogo/LyraNest-Xiaomi-Bridge)：LyraNest 小爱音响桥接项目。
-- [Solara](https://github.com/akudamatata/Solara)：Solara音乐下载插件项目。
-- [GoMusic](https://github.com/Bistutu/GoMusic)：GoMusic歌单导入项目。
+- [Solara](https://github.com/akudamatata/Solara)：Solara 音乐下载插件项目。
+- [GoMusic](https://github.com/Bistutu/GoMusic)：GoMusic 歌单导入项目。
 
 ## Star History
 
