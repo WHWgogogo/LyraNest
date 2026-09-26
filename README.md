@@ -361,8 +361,15 @@ LyraNest 提供模块化的外部音频输出与设备桥接插件，均已独�
   <img src="releases/0.2.3/%E4%B8%BA%E7%88%B1%E5%8F%91%E7%94%B5image/DDT.jpg" alt="DDT" width="56" height="56" />
   <img src="releases/0.2.3/%E4%B8%BA%E7%88%B1%E5%8F%91%E7%94%B5image/Heartless.jpg" alt="Heartless" width="56" height="56" />
   <img src="releases/0.2.3/%E4%B8%BA%E7%88%B1%E5%8F%91%E7%94%B5image/%E7%8E%A9%E7%94%B5%E7%9A%84%E5%B0%8F%E5%AD%A9%E0%B2%A5_%E0%B2%A5.jpg" alt="玩电的小孩ಥ_ಥ" width="56" height="56" />
+  <img src="releases/0.2.3/%E4%B8%BA%E7%88%B1%E5%8F%91%E7%94%B5image/%E2%84%A1%E2%95%AD%E3%82%A1%E9%A2%9D%E2%95%B0%E2%94%81%E2%95%90%E2%98%86.jpg" alt="℡╭ァ额╰━═☆" width="56" height="56" />
+  <img src="releases/0.2.3/%E4%B8%BA%E7%88%B1%E5%8F%91%E7%94%B5image/%E3%81%83%E5%A7%85%E9%9A%A8%E3%81%85%E5%B0%90%E5%86%AD%E9%99%BD%E3%81%8A.jpg" alt="ぃ姅隨ぅ尐冭陽お" width="56" height="56" />
 </p>
 
-<p align="center">DDT · Heartless · 玩电的小孩ಥ_ಥ</p>
+<p align="center">DDT · Heartless · 玩电的小孩ಥ_ಥ · ℡╭ァ额╰━═☆ · ぃ姅隨ぅ尐冭陽お</p>
 
 感谢你们的信任与鼓励，也感谢每一位使用、反馈和传播 LyraNest 的朋友。
+
+<p align="center">
+  <img src="docs/images/sponsor-qrcode.jpg" alt="LyraNest 赞赏码" width="220" />
+</p>
+
