@@ -16,7 +16,7 @@
   <a href="https://github.com/WHWgogogo/LyraNest/releases/latest">下载最新版</a> ·
   <a href="https://lyranest.top/">官网</a> ·
   <a href="#docker-compose-部署">Docker 部署</a> ·
-  <a href="releases/0.2.8/CHANGELOG.md">更新日志</a> ·
+  <a href="releases/0.2.9/CHANGELOG.md">更新日志</a> ·
   <a href="https://github.com/WHWgogogo/LyraNest-Community">开源社区版</a>
 </p>
 
@@ -24,40 +24,65 @@
 
 将音乐文件保存在自己的服务器、NAS 或电脑中，即可通过 Web、Windows、macOS、iOS、Android 和 Android TV 客户端管理、播放并同步个人音乐库。
 
-当前稳定版本：`0.2.8`
+当前稳定版本：`0.2.9`
 
 
 交流 QQ 群：`700454910`
 
-## 0.2.8 更新日志
+## 0.2.9 更新日志
 
-### 投播生态与多设备音频输出
+### 播放界面全面重做
 
-- **全新 AirPlay 2 桥接支持**：推出官方独立插件 [LyraNest AirPlay Bridge](https://github.com/WHWgogogo/LyraNest-AirPlay-Bridge)，支持将曲库音频无线投送至苹果 HomePod、Apple TV 及第三方 AirPlay 兼容音箱，支持全端独立音量与播控调节。
-- **全新本机 3.5mm / ALSA 声卡直出**：推出官方独立插件 [LyraNest Local Output](https://github.com/WHWgogogo/LyraNest-Local-Output)，专为 NAS 与主机硬件打造，通过 ALSA / MPD 直通 NAS 本地 3.5mm 耳机孔或 USB DAC 外置声卡，无损原音输出，内存占用仅 13MB。
-- **全端聚合投送中心**：统一聚合 AirPlay 2、本地声卡、DLNA 及小爱音箱四大通道，支持设备状态实时探测、进度条拖拽同步（Seek Offset）与音量滑块调节。
-- **小爱音箱桥接器升级至 v1.1.6**：官方插件 [LyraNest Xiaoai Bridge](https://github.com/WHWgogogo/LyraNest-Xiaoai-Bridge) 全面升级，新增多音箱会话隔离与多账号用户设备绑定，支持有声书语音点播与双向断点续播，引入虚拟播放时钟解决休眠状态回传延迟与断流问题。
+- **播放页新增「负一屏」**：在播放页往右滑即可滑出，展示这首歌的来路（专辑、艺术家、格式、大小）与歌曲推荐；桌面端与横屏可在右栏直接进入，同一份内容、同一份设置。专辑信息、艺术家信息、歌曲推荐三个分区可自由开关，至少保留一块。
+- **同专辑 / 同艺术家续播**：推荐列表下方新增入口，优先同专辑，专辑字段为空时退回同艺术家，最多 8 首。
+- **律动柱与整首歌频谱图**：播放页主屏的歌词位可换成律动柱；新增整首歌频谱图（横轴时间、纵轴频率），一眼看出高频是到 20kHz 还是被截在 16kHz，用来判断手上的「无损」是不是真的无损。Web 端在曲库「更多」菜单里也能看。
 
-### 连接架构与免配扫码登录
+### 播放页布局与主题
 
-- **X25519 局域网端到端加密扫码登录**：手机 App 扫描 Web 端或 TV 端二维码即可秒级完成安全配对与跨端鉴权，彻底告别手动输入 IP、端口与密码。
-- **飞牛 FNID 穿透与跨网自适应**：重构 FNID 多端点竞速优选与双签名鉴权算法，大幅提升无公网 IP 环境下的跨网穿透连通率与冷启动速度；隔离同 IP 多端口的会话冲突。
+- **四种播放界面容器样式**：毛玻璃卡片、无界悬浮、复古黑胶卡片、极简。
+- **六套主题色系**：设置里可自由切换，主题构建改用色系种子色，整套配色一起变。
+- **手势与转场**：手机端新增下滑关闭播放页的手势；主页面切页改为跟手拖动 + 两页同场交叉位移并配高斯模糊过渡，切页后键盘不再自动弹出。
+- 平板与 Windows 的侧栏改为悬浮圆角卡片。
 
-### 无损格式与网络串流
+### 音频与播放品质
 
-- **原生支持 STRM 网络流媒体文件**：音乐与有声书全面支持 `.strm` 文件识别与入库，支持 302 重定向、反代播放与动态按需转码；有声书 STRM 章节支持跨端拖拽寻道与进度断点记忆。
-- **CUE 虚拟分轨与切片串流**：整轨音频配合同名 `.cue` 索引文件自动虚拟分轨入库，服务端支持任意时间偏移切片 Seeking，实现精准秒开。
-- **扩充高清无损解码**：新增 DSF、DFF（DSD 母带级音频）、WavPack、CAF 与 AIFF-C 高清无损音频解码嗅探与元数据提取，集成 APE 专用头部解析器。
+- 播放品质面板新增 PCM / WAV 档位，可通过点击播放标签快速切换。
+- 修复转码与源码来回切换后停止播放、界面显示已停但仍在后台转码；修复开启缓存时外网转码情况下依旧在后台满速拖无损原盘。
+- Android 网络流开启磁盘缓存，弱网下拖动进度条更稳。
+- 修复一首歌播完卡在暂停不进下一首、切歌后播放图标异常、开启交叉淡化后播完一首就卡住、播到片尾误报「解码错误」等问题。
 
-### 曲库治理、有声书与全端体验
+### 曲库、收藏与本机音乐
 
-- **隐藏歌曲独立管理页**：集中查看被去重或手动隐藏的全部曲目，支持单曲恢复与批量一键移出隐藏名单；TV 端深度适配遥控器方向键快捷操作。
-- **挂载目录失效容错**：磁盘离线或物理路径变更时自动标记失效状态，并允许直接在管理面板中安全解挂与删除。
-- **智能刮削算法 V2**：引入证据门控与冲突抑制模型，大幅降低误刮削；强化基于目录层级与 URL 的路径元数据推断机制（PathMeta）。
-- **有声书系统深化**：支持全网有声书搜索并直接下载导入专属私有书架，全屏播放器增加专属书籍标签与章节树，支持整本书籍加入跨端投送队列。
-- **全平台客户端原生齐备**：移动端新增悬浮毛玻璃胶囊导航栏与旋转黑胶 Disc 迷你播放器；正式推出 macOS 原生客户端（DMG / ZIP）与 iOS 原生客户端（IPA）；Android TV 端全面对齐 STRM 串流与免配扫码登录；全 NAS 体系官方包覆盖飞牛、群晖、铁威马、威联通、绿联、畅网。
+- 全部曲目、收藏、歌单、已下载、本机分区都补齐「播放全部 / 随机播放」；随机播放改为即时真随机。
+- 曲库支持多选 / 全选批量操作，单曲可查看技术信息与一键复制路径；歌单支持重命名；最近入库歌曲展示上限从 20 首提升到 50 首。
+- **本机音乐扫描**：可扫描整机或指定目录（Android 支持 SAF 目录选择），自定义短音频过滤规则，扫到的歌可就地播放或上传到 NAS；按路径与指纹双重去重，白名单叠加私有加密后缀黑名单，0 时长与未知时长的提示音不再入库。
+- 新增「隐藏歌曲」管理页，集中查看被去重或手动隐藏的曲目，支持单曲恢复与批量移出。
 
-完整更新记录请查看 [`releases/0.2.8/CHANGELOG.md`](releases/0.2.8/CHANGELOG.md)。
+### 歌词、有声书与连接
+
+- 新增插件 LrcApi，支持逐字歌词识别与纯音乐占位识别；启用后可在播放时自动搜索在线歌词，命中后按偏好写入服务端或只保存在本机。
+- Windows 任务栏与 macOS 菜单栏新增逐字歌词显示，跟随播放进度高亮，可在设置里开关。
+- 听书播放器新增专属书类标签与章节树，支持整本书籍加入跨端投送队列；支持自定义跳过片头片尾区间，跳片头与拖动进度改用原生 Range 定位，不再强制转码。
+- 插件中心新增第三方有声书搜索与下载面板，可一键搜索并直接下载导入私有书架。
+- 全端零配置扫码登录：手机扫描 Web 端或 TV 端二维码即可完成配对与跨端鉴权；局域网地址切换时自动探活并快速回退到外网地址。
+- 修复同一 IP 不同端口多实例部署时的 Session 串扰。
+
+### TV 端
+
+- 界面缩放改为按屏幕高度自适应，小屏上不再出现「UI 巨大」；新增缩放档位与渲染分辨率开关。
+- 听歌时的 GPU / CPU 占用大幅下降：模糊层不再每帧重算、光斑降到 2fps、逐字歌词高亮不再跟 vsync 跑。
+- 修复「一进音乐就闪回桌面」；修正遥控器方向键语义；侧边歌词在末尾几行不再来回跳。
+
+### 服务端与 Web 端
+
+- 新增整首歌频谱图接口与律动频谱数据接口（服务端 PCM 解码 + FFT），结果落盘缓存；频谱图纵轴改为对数刻度，律动分析采样率与频段划分重新校准。
+- 转码新增 PCM / WAV 输出；服务端运行日志同时落盘，并在 GUI 与开始菜单提供查看入口。
+- 刮削算法升级 V2，引入证据门控与冲突抑制，大幅降低同名歌曲、多艺人混淆导致的误刮削；新增本地曲目智能刮削候选查询与上传元数据落库。
+- 挂载目录失效时自动标记状态，允许在管理面板里安全解挂与删除；识别并清理 NAS 曲库中的私有加密音频。
+- 修复自定义源刮削的性能问题与 Watcher 重复扫描风暴；新增定向曲库查重与隐藏，以及自定义存储目录配置。
+- Web 端播放页可点击封面查看频谱图；修复收藏区只显示当前分页里的歌、其余收藏全部不可见的严重问题；修复矮窗口下播放页底部露出黑条、插件配置弹窗底部按钮被播放栏遮住。
+
+完整更新记录请查看 [`releases/0.2.9/CHANGELOG.md`](releases/0.2.9/CHANGELOG.md)。
 
 ## 功能简介
 
@@ -176,35 +201,39 @@
 
 | 文件 | 说明 |
 | --- | --- |
-| `LyraNest-0.2.8-android-arm64.apk` | Android 手机、平板客户端 |
-| `LyraNest-0.2.8-ios-arm64.ipa` | iOS 移动客户端（测试阶段，无签名，需自行签名侧载安装） |
-| `LyraNest-0.2.8-harmony.hap` | 华为鸿蒙 HarmonyOS 原生客户端（测试阶段，无签名，需开发者模式安装） |
-| `LyraNest-0.2.8-windows-x64.zip` | Windows 桌面客户端 |
-| `LyraNest-Server-0.2.8-windows-x64.zip` | Windows 服务端独立运行包 |
-| `LyraNest-0.2.8-macos-universal.dmg` | macOS 桌面客户端（通用架构 DMG，测试阶段，无签名，需允许安全偏好） |
-| `LyraNest-0.2.8-macos-universal.zip` | macOS 桌面客户端（通用架构免安装 ZIP 归档，测试阶段，无签名） |
-| `LyraNest-TV-0.2.8-arm64-v8a.apk` | Android TV ARM64 客户端 |
-| `LyraNest-TV-0.2.8-armeabi-v7a.apk` | Android TV ARM32 客户端 |
-| `LyraNest-0.2.8-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
-| `LyraNest-0.2.8-fnos-arm.fpk` | 飞牛 fnOS ARM 原生安装包 |
-| `LyraNest-Compat-0.2.8-fnos-x86.fpk` | fnOS x86 兼容版（不依赖统一网关） |
-| `LyraNest-Compat-0.2.8-fnos-arm.fpk` | fnOS ARM 兼容版（不依赖统一网关） |
-| `LyraNest-0.2.8-synology-x86_64.spk` | Synology DSM x86_64 原生安装包 |
-| `LyraNest-0.2.8-synology-armv8.spk` | Synology DSM ARM64 原生安装包 |
-| `LyraNest-0.2.8-terramaster-x86_64.deb` | 铁威马 TOS 7 x86_64 原生安装包 |
-| `LyraNest-0.2.8-terramaster-aarch64.deb` | 铁威马 TOS 7 ARM64 原生安装包 |
-| `LyraNest-0.2.8-qnap-x86_64.qpkg` | QNAP x86_64 原生安装包 |
-| `LyraNest-0.2.8-qnap-arm_64.qpkg` | QNAP ARM64 原生安装包 |
-| `LyraNest-0.2.8-ugnas-amd64.upk` | 绿联 NAS AMD64 原生安装包 |
-| `LyraNest-0.2.8-ugnas-arm64.upk` | 绿联 NAS ARM64 原生安装包 |
-| `LyraNest-0.2.8-cwnas.cpk` | 畅网 NAS (CWNAS / AINAS) 原生应用包 |
-| `LyraNest-0.2.8-docker-linux-amd64.tar.gz` | Docker Linux AMD64 离线镜像归档（`docker load`） |
-| `LyraNest-0.2.8-docker-linux-arm64.tar.gz` | Docker Linux ARM64 离线镜像归档（`docker load`） |
+| `LyraNest-0.2.9-android-arm64.apk` | Android 手机、平板客户端 |
+| `LyraNest-0.2.9-ios-arm64.ipa` | iOS 移动客户端（测试阶段，无签名，需自行签名侧载安装） |
+| `LyraNest-0.2.9-harmony.hap` | 华为鸿蒙 HarmonyOS 原生客户端（测试阶段，无签名，需开发者模式安装） |
+| `LyraNest-0.2.9-windows-x64.zip` | Windows 桌面客户端 |
+| `LyraNest-Server-0.2.9-windows-x64.zip` | Windows 服务端独立运行包 |
+| `LyraNest-0.2.9-macos-universal.dmg` | macOS 桌面客户端（通用架构 DMG，测试阶段，无签名，需允许安全偏好） |
+| `LyraNest-0.2.9-macos-universal.zip` | macOS 桌面客户端（通用架构免安装 ZIP 归档，测试阶段，无签名） |
+| `LyraNest-0.2.9-macos-x64.zip` | macOS 桌面客户端（x64 免安装 ZIP 归档，测试阶段，无签名） |
+| `LyraNest-TV-0.2.9-arm64-v8a.apk` | Android TV ARM64 客户端 |
+| `LyraNest-TV-0.2.9-armeabi-v7a.apk` | Android TV ARM32 客户端 |
+| `LyraNest-TV-Android5-0.2.9-arm64-v8a.apk` | Android 5/6 老设备 TV ARM64 客户端 |
+| `LyraNest-TV-Android5-0.2.9-armeabi-v7a.apk` | Android 5/6 老设备 TV ARM32 客户端 |
+| `LyraNest-TV-Android5-0.2.9-universal.apk` | Android 5/6 老设备 TV 通用架构客户端 |
+| `LyraNest-0.2.9-fnos-x86.fpk` | 飞牛 fnOS x86 原生安装包（NAS 用户推荐） |
+| `LyraNest-0.2.9-fnos-arm.fpk` | 飞牛 fnOS ARM 原生安装包 |
+| `LyraNest-Compat-0.2.9-fnos-x86.fpk` | fnOS x86 兼容版（不依赖统一网关） |
+| `LyraNest-Compat-0.2.9-fnos-arm.fpk` | fnOS ARM 兼容版（不依赖统一网关） |
+| `LyraNest-0.2.9-synology-x86_64.spk` | Synology DSM x86_64 原生安装包 |
+| `LyraNest-0.2.9-synology-armv8.spk` | Synology DSM ARM64 原生安装包 |
+| `LyraNest-0.2.9-terramaster-x86_64.deb` | 铁威马 TOS 7 x86_64 原生安装包 |
+| `LyraNest-0.2.9-terramaster-aarch64.deb` | 铁威马 TOS 7 ARM64 原生安装包 |
+| `LyraNest-0.2.9-qnap-x86_64.qpkg` | QNAP x86_64 原生安装包 |
+| `LyraNest-0.2.9-qnap-arm_64.qpkg` | QNAP ARM64 原生安装包 |
+| `LyraNest-0.2.9-ugnas-amd64.upk` | 绿联 NAS AMD64 原生安装包 |
+| `LyraNest-0.2.9-ugnas-arm64.upk` | 绿联 NAS ARM64 原生安装包 |
+| `LyraNest-0.2.9-cwnas.cpk` | 畅网 NAS (CWNAS / AINAS) 原生应用包 |
+| `LyraNest-0.2.9-docker-linux-amd64.tar.gz` | Docker Linux AMD64 离线镜像归档（`docker load`） |
+| `LyraNest-0.2.9-docker-linux-arm64.tar.gz` | Docker Linux ARM64 离线镜像归档（`docker load`） |
 | `docker-compose.yml` | Docker Compose 在线部署配置 |
 
 ## 飞牛 fnOS 原生 FPK 安装（推荐）
 
-飞牛 NAS 用户请从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应架构的 FPK：x86_64 使用 `LyraNest-0.2.8-fnos-x86.fpk`，ARM64 使用 `LyraNest-0.2.8-fnos-arm.fpk`；标准版与兼容版二选一，不可同时安装。
+飞牛 NAS 用户请从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应架构的 FPK：x86_64 使用 `LyraNest-0.2.9-fnos-x86.fpk`，ARM64 使用 `LyraNest-0.2.9-fnos-arm.fpk`；标准版与兼容版二选一，不可同时安装。
 
 安装后，在应用设置中授权音乐目录并启动 LyraNest。默认使用飞牛统一网关访问：在你平时打开飞牛管理界面的局域网地址后追加 `/app/lyranest`。
 
@@ -212,26 +241,26 @@
 
 ## 畅网 NAS (CWNAS / AINAS) 原生 CPK 安装
 
-畅网 NAS 用户可下载 `LyraNest-0.2.8-cwnas.cpk`。在畅网 NAS 系统应用管理器中点击“手动安装 / 本地安装”，选择下载的 `.cpk` 文件即可一键部署并注册后台服务与入口图标。
+畅网 NAS 用户可下载 `LyraNest-0.2.9-cwnas.cpk`。在畅网 NAS 系统应用管理器中点击“手动安装 / 本地安装”，选择下载的 `.cpk` 文件即可一键部署并注册后台服务与入口图标。
 
 ## 其他 NAS 原生安装包
 
 QNAP、Synology DSM、绿联 NAS 与铁威马 TOS 7 用户可从 [GitHub 最新发行版](https://github.com/WHWgogogo/LyraNest/releases/latest) 下载对应的原生包，在各自系统的应用中心或套件中心选择手动安装。请先在 NAS 系统信息中确认 CPU 架构：x86/x86_64 或 AMD64 设备使用 `x86_64`/`amd64` 文件，ARM64 设备使用 `arm_64`/`armv8`/`aarch64` 文件；不同 NAS 系统的安装包不能交叉安装。
 
-- QNAP：`LyraNest-0.2.8-qnap-x86_64.qpkg` 或 `LyraNest-0.2.8-qnap-arm_64.qpkg`。
-- Synology DSM：`LyraNest-0.2.8-synology-x86_64.spk` 或 `LyraNest-0.2.8-synology-armv8.spk`。
-- 绿联 NAS：`LyraNest-0.2.8-ugnas-amd64.upk` 或 `LyraNest-0.2.8-ugnas-arm64.upk`。
-- 铁威马 TOS 7：`LyraNest-0.2.8-terramaster-x86_64.deb` 或 `LyraNest-0.2.8-terramaster-aarch64.deb`。
+- QNAP：`LyraNest-0.2.9-qnap-x86_64.qpkg` 或 `LyraNest-0.2.9-qnap-arm_64.qpkg`。
+- Synology DSM：`LyraNest-0.2.9-synology-x86_64.spk` 或 `LyraNest-0.2.9-synology-armv8.spk`。
+- 绿联 NAS：`LyraNest-0.2.9-ugnas-amd64.upk` 或 `LyraNest-0.2.9-ugnas-arm64.upk`。
+- 铁威马 TOS 7：`LyraNest-0.2.9-terramaster-x86_64.deb` 或 `LyraNest-0.2.9-terramaster-aarch64.deb`。
 
 ## Docker 镜像
 
 服务端镜像统一命名为：
 
 ```text
-ghcr.io/whwgogogo/lyranest-server:0.2.8
+ghcr.io/whwgogogo/lyranest-server:0.2.9
 ```
 
-生产环境请固定 `LYRANEST_VERSION=0.2.8`。同时发布 `0.2.8` 与 `latest` 标签，其中 `latest` 指向当前稳定版 `0.2.8`；同一个多架构标签会按设备自动选择 AMD64 或 ARM64 镜像。
+生产环境请固定 `LYRANEST_VERSION=0.2.9`。同时发布 `0.2.9` 与 `latest` 标签，其中 `latest` 指向当前稳定版 `0.2.9`；同一个多架构标签会按设备自动选择 AMD64 或 ARM64 镜像。
 
 > 如果 Docker 报出 `proxyconnect tcp ... 127.0.0.1:27897: connect: connection refused`，请移除 Docker 守护进程中失效的 HTTP/HTTPS 代理后再拉取。若设备不能联网，可使用本次发行的 Docker 离线包并按下方命令导入和标记镜像。
 
@@ -242,7 +271,7 @@ ghcr.io/whwgogogo/lyranest-server:0.2.8
 ```yaml
 services:
   music-server:
-    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.8}
+    image: ghcr.io/whwgogogo/lyranest-server:${LYRANEST_VERSION:-0.2.9}
     container_name: lyranest-server
     restart: unless-stopped
     mem_limit: 256m
@@ -259,7 +288,7 @@ services:
       GOGC: "100"
       MEDIA_EXTRACT_CONCURRENCY: "4"
       MEDIA_SCRAPE_CONCURRENCY: "2"
-      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.8 (+https://github.com/WHWgogogo/LyraNest)"
+      MUSICBRAINZ_USER_AGENT: "LyraNest/0.2.9 (+https://github.com/WHWgogogo/LyraNest)"
       MUSICBRAINZ_BASE_URL: "https://musicbrainz.org"
       MUSICBRAINZ_TIMEOUT: "20s"
       LOG_LEVEL: "info"
@@ -292,11 +321,11 @@ docker compose up -d
 
 ### 2. GHCR 无法访问时离线部署
 
-优先下载与设备架构匹配的 Docker 离线镜像归档：AMD64 使用 `LyraNest-0.2.8-docker-linux-amd64.tar.gz`，ARM64 使用 `LyraNest-0.2.8-docker-linux-arm64.tar.gz`。两份归档均包含完整镜像，按设备架构选择其中一份即可。
+优先下载与设备架构匹配的 Docker 离线镜像归档：AMD64 使用 `LyraNest-0.2.9-docker-linux-amd64.tar.gz`，ARM64 使用 `LyraNest-0.2.9-docker-linux-arm64.tar.gz`。两份归档均包含完整镜像，按设备架构选择其中一份即可。
 
 ```bash
-docker load -i LyraNest-0.2.8-docker-linux-amd64.tar.gz
-docker tag lyranest-server:0.2.8 ghcr.io/whwgogogo/lyranest-server:0.2.8
+docker load -i LyraNest-0.2.9-docker-linux-amd64.tar.gz
+docker tag lyranest-server:0.2.9-amd64 ghcr.io/whwgogogo/lyranest-server:0.2.9
 curl -fLO https://github.com/WHWgogogo/LyraNest/releases/latest/download/docker-compose.yml
 mkdir -p music downloads data cache
 docker compose up -d --pull never
@@ -305,8 +334,8 @@ docker compose up -d --pull never
 ARM64 设备使用下面的归档和本地标签：
 
 ```bash
-docker load -i LyraNest-0.2.8-docker-linux-arm64.tar.gz
-docker tag lyranest-server:0.2.8-arm64 ghcr.io/whwgogogo/lyranest-server:0.2.8
+docker load -i LyraNest-0.2.9-docker-linux-arm64.tar.gz
+docker tag lyranest-server:0.2.9-arm64 ghcr.io/whwgogogo/lyranest-server:0.2.9
 docker compose up -d --pull never
 ```
 
