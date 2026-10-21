@@ -82,7 +82,6 @@ jobs:
             "${SOURCE_DIR}/LyraNest-Server-${VERSION}-windows-x64.zip"
             "${SOURCE_DIR}/LyraNest-${VERSION}-macos-universal.dmg"
             "${SOURCE_DIR}/LyraNest-${VERSION}-macos-universal.zip"
-            "${SOURCE_DIR}/LyraNest-${VERSION}-macos-x64.zip"
             "${SOURCE_DIR}/LyraNest-${VERSION}-fnos-x86.fpk"
             "${SOURCE_DIR}/LyraNest-${VERSION}-fnos-arm.fpk"
             "${SOURCE_DIR}/LyraNest-Compat-${VERSION}-fnos-x86.fpk"

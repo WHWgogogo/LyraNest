@@ -208,7 +208,6 @@
 | `LyraNest-Server-0.2.9-windows-x64.zip` | Windows 服务端独立运行包 |
 | `LyraNest-0.2.9-macos-universal.dmg` | macOS 桌面客户端（通用架构 DMG，测试阶段，无签名，需允许安全偏好） |
 | `LyraNest-0.2.9-macos-universal.zip` | macOS 桌面客户端（通用架构免安装 ZIP 归档，测试阶段，无签名） |
-| `LyraNest-0.2.9-macos-x64.zip` | macOS 桌面客户端（x64 免安装 ZIP 归档，测试阶段，无签名） |
 | `LyraNest-TV-0.2.9-arm64-v8a.apk` | Android TV ARM64 客户端 |
 | `LyraNest-TV-0.2.9-armeabi-v7a.apk` | Android TV ARM32 客户端 |
 | `LyraNest-TV-Android5-0.2.9-arm64-v8a.apk` | Android 5/6 老设备 TV ARM64 客户端 |
